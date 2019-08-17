@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  memory_image_id: MyText
+  temple_id: MyText
+  user_id: MyText
+  memory_comment: MyText
+  visit_date: 2019-08-04 15:47:53
+
+two:
+  memory_image_id: MyText
+  temple_id: MyText
+  user_id: MyText
+  memory_comment: MyText
+  visit_date: 2019-08-04 15:47:53

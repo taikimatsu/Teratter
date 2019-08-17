@@ -1,0 +1,37 @@
+<!-- ユーザー問合せ画面 -->
+
+<div style="text-align: center; margin-top: 140PX;">
+	<h1 style="border-bottom: solid 3px #8b0000; width: 500px; margin: 40px auto;">お問い合わせ入力フォーム</h1>
+	<p> 投稿したい寺・神社を追加してほしい等、ございましたら下記フォームよりお問い合わせください。<br>
+		返信は、ご登録されている下記のメールアドレス宛にさせていただきます。
+	</p>
+
+	<div style="margin-top: 50px;">
+		<%= form_for(@contact, :url => {:controller => :contacts, :action => :create}) do |f| %>
+
+
+			<% if @contact.errors.any? %>
+					<div id="error_explanation" style="color: red; margin: 20px auto; width: 400px;">
+						<h3>お問い合わせ内容を入力してください</h3>
+					</div>
+			<% end %>
+			<div style="margin: 20px auto; width: 400px;">
+				<h3>ユーザー名：<strong><%= @user.name %></strong> さん</h3>
+			</div>
+
+			<div style="margin: 20px auto; width: 400px;">
+				<h3> メールアドレス:<strong><%= @user.email %></strong></h3>
+			</div>
+			<div style="margin: 30px auto;">
+				<h2> お問い合わせ内容</h2>
+				<%= f.text_area :contact,style: "width:450px; height:300px;", placeholder: "お問い合わせ内容の入力" %>
+			</div>
+
+			<div style="margin-top: 10px; margin-bottom: 10px;">
+				<%= f.submit '送信' %>
+			</div>
+
+		<% end %>
+	</div>
+</div>
+

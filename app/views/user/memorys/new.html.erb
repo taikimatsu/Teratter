@@ -1,0 +1,32 @@
+<div style="text-align: center;">
+	<h1 style="border-bottom: solid 3px #8b0000; width: 400px; margin: 20px auto;"><%= @temple.name %>・新規投稿</h1>
+
+
+		<%= form_for(@memory, :url => {:controller => :memorys, :action => :create}) do |f| %>
+
+
+			<div style="margin: 20px auto; width: 400px;">
+				<h3>訪問日時</h3>
+				<%= f.date_select :visit_date %>
+			</div>
+
+			<div style="margin: 20px auto; width: 400px;">
+				<h3>写真</h3>
+				<%= f.attachment_field :memory_images_images, multiple: true %>
+			</div>
+
+			<div style="margin: 20px auto; width: 400px;">
+				<h3>タイトル</h3>
+				<%= f.text_field :title,:class => "form-control" %>
+			</div>
+			<div style="margin: 20px auto; width: 400px;">
+				<h3>感想</h3>
+				<%= f.text_area :body,:class => "form-control" %>
+			</div>
+
+			<div style="margin: 20px auto; width: 400px;">
+				<%= f.submit '新規追加' %>
+			</div>
+
+		<% end %>
+</div>

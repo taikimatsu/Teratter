@@ -1,0 +1,69 @@
+<div style="text-align: center; margin-top: 140px;">
+<%= search_form_for(@q, :url => {:controller => :temples, :action => :search}) do |f| %>
+
+  <div style="margin-bottom: 20px;">
+    <h2>検索</h2>
+  </div>
+
+  <div>
+  <%# start 特定の文字列で始まる商品名で検索 %>
+  <%= f.label :name_cont, "寺・神社名" %>
+  <%= f.search_field :name_cont %>
+  </div>
+  <br />
+
+  <div>
+  <%= f.label :prefecture_id_eq, "都道府県名" %>
+  <%= f.collection_select :prefecture_id_eq, @prefectures, :id, :name, :include_blank => '指定なし'%>
+  </div>
+  <br />
+
+  <div>
+  <%= f.label :goriyaku_id_eq, "ご利益名" %>
+  <%= f.collection_select :goriyaku_id_eq, @goriyakus, :id, :name, :include_blank => '指定なし'%>
+</div>
+  <br />
+
+  <%# 検索ボタン %>
+  <%= f.submit %>
+<% end %>
+</div>
+
+<!--
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map3</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      #map {
+        height: 100%;
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .sample {
+        width: 100px;
+        height: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map" style="height: 500px; width: 50%; margin: 2rem auto 0;"></div>
+    <button id="getcurrentlocation">現在地周辺から探す</button>
+    -->
+
+
+    <!-- jquery読み込む -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- google map api -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDV7aHnCQ6Lbws5KlkFCA7XzgB4So2mREE&libraries=places"
+    ></script>
+    <!-- js -->
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  </body>
+</html>

@@ -1,0 +1,193 @@
+// Place all the styles related to the user/temples controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.templeheader{
+    position: fixed;
+    top: 87px;
+    left: 0;
+    z-index: 24;
+    width: 100%;
+}
+
+.navheader{
+    position: fixed;
+    top: 127px;
+    left: 0;
+    z-index: 24;
+    width: 100%;
+}
+
+.tab-pane {
+  margin-top: 20px;
+}
+
+#temple-info {
+	font-size: 20px;
+	margin-top: 50px;
+	text-align: center;
+}
+
+#map {
+    width: 600px;
+    height: 400px;
+    margin: 0 auto;
+}
+
+.balloon{
+  position: relative;
+  padding: 20px;
+  background-color: #fff3ad;
+  border-radius: 10px;
+}
+
+.balloon::before{
+  content: '';
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  left: -15px;
+  top: 20px;
+  border-right: 15px solid #fff3ad;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+}
+
+.wrap {
+    width:400px;
+    background:#000;
+    margin:20px auto;
+    padding:10px;
+}
+.wrap p {
+    height:400px;
+}
+.wrap ul {
+    display:block;
+    overflow:hidden;
+    margin-top:10px;
+    clear:both;
+}
+.wrap li {
+    display:block;
+    float:left;
+    background:#fff;
+    argin-right:10px;
+}
+.wrap li img {
+    cursor:pointer;
+}
+
+.nav-item {
+  margin: 0 30px 0 30px;
+}
+
+.nav-item a:link {
+  color: #8b0000;
+}
+
+.nav-item a:visited {
+  color: #8b0000;
+}
+
+.nav-item a:hover {
+  background-color: #8b0000;
+  color: white;
+}
+
+.nav-item a:active {
+  background-color: #8b0000;
+  color: white;
+}
+
+.nav-pills .nav-item .nav-link.active {
+  background-color: #8b0000;
+}
+
+.list-group .list-group-item-action.active {
+  background-color: #8c8c00;
+  border-color: #8c8c00;
+}
+
+
+.temples{
+  position: relative;
+  width: 350px;
+  height: 270px;
+  float: left;
+}
+.templeranks{
+  position: relative;
+  width: 350px;
+  height: 270px;
+  margin-bottom: 50px;
+}
+
+.temples:nth-child(3n+1){
+  margin: 30px 20px 30px 164px;
+}
+
+.temples:nth-child(3n-1){
+  margin: 30px 10px 30px 10px;
+}
+
+.temples:nth-child(3n){
+  margin: 30px 164px 30px 20px;
+}
+
+
+.temples::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.2);
+}
+
+.templeranks::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.2);
+}
+
+
+.temples p{
+  position: absolute;/*絶対配置*/
+  color: white;/*文字は白に*/
+  top: 0px;
+  left: 20px;
+  font-size: 40px;
+}
+
+.templeranks p{
+  position: absolute;/*絶対配置*/
+  color: white;/*文字は白に*/
+  top: 0px;
+  left: 20px;
+  font-size: 40px;
+}
+
+
+
+.temples h4{
+  position: absolute;/*絶対配置*/
+  color: white;/*文字は白に*/
+  top: 60px;
+  left: 20px;
+  font-size: 30px;
+}
+
+.templeranks h4{
+  position: absolute;/*絶対配置*/
+  color: white;/*文字は白に*/
+  top: 60px;
+  left: 20px;
+  font-size: 30px;
+}

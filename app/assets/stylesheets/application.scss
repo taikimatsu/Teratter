@@ -1,0 +1,130 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+
+ */
+
+    // Custom bootstrap variables must be set or imported *before* bootstrap.
+    @import "bootstrap";
+
+.header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 25;
+    width: 100%;
+}
+
+
+.headertitle{
+    font-size: 30px;
+    margin-top: 10px;
+}
+
+body,
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+footer {
+  margin-top: auto;
+}
+
+.back {
+	min-height: 90vh;
+	background-size: cover;
+	background-position: center;
+}
+
+input[type="text"] {
+        width: 300px;
+        height: 40px;
+    }
+
+input[type="password"] {
+        width: 300px;
+        height: 40px;
+    }
+
+input[type="email"] {
+        width: 300px;
+        height: 40px;
+    }
+
+input[type="submit"] {
+	    padding: 15px 40px;
+	    font-size: 1.2em;
+	    background-color: orange;
+	    color: #fff;
+	    border-style: none;
+}
+
+input[type="number"] {
+        width: 100px;
+        height: 40px;
+    }
+
+#user_age {
+	width: 100px;
+    height: 40px;
+    font-size: 20px;
+    }
+
+#user_gender {
+	width: 100px;
+    height: 40px;
+    font-size: 20px;
+    }
+
+.classname {
+    font-size: 25px;
+    margin-right: 30px;
+    margin-top: 12px;
+    color: white;
+}
+
+.hidden_box {
+    margin-top: 8px;
+    padding: 0;
+}
+
+.hidden_box input {
+    display: none;
+}
+
+.hidden_box .hidden_show {
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: 0.8s;
+}
+
+.hidden_show {
+    background: white;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+}
+
+.hidden_show li {
+    margin-right: 15px;
+    padding: 5px;
+}
+
+.hidden_box input:checked ~ .hidden_show {
+    padding: 10px 0;
+    height: auto;
+    opacity: 1;
+}

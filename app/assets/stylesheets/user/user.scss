@@ -1,0 +1,28 @@
+// Place all the styles related to the user/user controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.japanmap{
+	text-align: center;
+}
+
+.col-md-7{
+	padding: 0.5em 1em;
+    margin: 2em 0;
+    font-weight: bold;
+    background: #FFF;
+    border: solid 3px black;/*線*/
+    border-radius: 10px;/*角の丸み*/
+}
+
+.profilelist{
+	float: left;
+	margin-left: 60px;
+}
+
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}

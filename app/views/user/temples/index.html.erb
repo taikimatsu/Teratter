@@ -1,0 +1,165 @@
+<div class="templeheader" style="background-color: moccasin; width: 100%; margin: 0 auto; margin-bottom: 5px;">
+    <ul class="nav nav-pills justify-content-center" >
+      <li class="nav-item"><%= link_to "寺・神社", user_temples_path, class: "nav-link active" %></li>
+      <li class="nav-item"><%= link_to "参拝記録", user_memorys_path, class: "nav-link" %></li>
+    </ul>
+</div>
+
+<div class="navheader" style="margin: 0 auto; background-color: moccasin; width: 100%;">
+    <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="pills-ranking-tab" data-toggle="pill" href="#pills-ranking" role="tab" aria-controls="pills-ranking" aria-selected="true">週間お気に入りランキング</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-hokkaidou-tab" data-toggle="pill" href="#pills-hokkaidou" role="tab" aria-controls="pills-hollaidou" aria-selected="false">北海道</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-touhoku-tab" data-toggle="pill" href="#pills-touhoku" role="tab" aria-controls="pills-touhoku" aria-selected="false">東北</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-kantou-tab" data-toggle="pill" href="#pills-kantou" role="tab" aria-controls="pills-kantou" aria-selected="false">関東</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-tyubu-tab" data-toggle="pill" href="#pills-tyubu" role="tab" aria-controls="pills-tyubu" aria-selected="false">中部</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-kinki-tab" data-toggle="pill" href="#pills-kinki" role="tab" aria-controls="pills-kinki" aria-selected="false">近畿</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-tyugoku-tab" data-toggle="pill" href="#pills-tyugoku" role="tab" aria-controls="pills-tyugoku" aria-selected="false">中国</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-sikoku-tab" data-toggle="pill" href="#pills-sikoku" role="tab" aria-controls="pills-sikoku" aria-selected="false">四国</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-kyusyu-tab" data-toggle="pill" href="#pills-kyusyu" role="tab" aria-controls="pills-kyusyu" aria-selected="false">九州・沖縄</a>
+      </li>
+    </ul>
+</div>
+
+<!-- パネル部分 -->
+<div class="tab-content" id="pills-tabContent" style="margin-top : 170px;">
+
+    <div class="tab-pane fade show active" id="pills-ranking" role="tabpanel" aria-labelledby="pills-ranking-tab" style="margin-top: 20px;">
+      <div class="row" style="margin-top: 120px;">
+        <div class="col-lg-2">
+          <% @all_ranks.each.with_index(1) do |temple,i| %>
+          <p style="margin-bottom: 245px; margin-left: 250px; font-size: 35px; ">
+            <i class="fas fa-award" style="color: gold;"><%= "#{i}"  %></i>
+          </p><br>
+          <% end %>
+
+        </div>
+
+        <div class="col-lg-4">
+          <% @all_ranks.each do |temple| %>
+            <div style="font-size: 22px; width: 200px; color: white; background-color:#8b0000; text-align: center;margin-left: 150px; margin-bottom: 265px;">
+                <%= temple.clips.count %><br>
+                <p style="font-size: 15px;">週間お気に入り追加数</p>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="col-lg-6">
+          <% @all_ranks.each do |temple| %>
+            <div class="templeranks">
+              <%= link_to user_temple_path(temple)  do %>
+                <%= attachment_image_tag temple, :mainimage, :fill, 350, 270, format: 'jpeg', fallback: "no_image.jpg",class: "temples-image" %><br>
+                <p><%= temple.name %></p>
+                <h4>(<%= temple.prefecture.name %>)</h4>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="pills-hokkaidou" role="tabpanel" aria-labelledby="pills-hokkaidou-tab">
+        <% @hokkaidous.each do |hokkaidou| %>
+        <div class="temples">
+          <%= link_to user_temple_path(hokkaidou)  do %>
+            <%= attachment_image_tag hokkaidou, :mainimage, :fill, 350, 270, format: 'jpeg', fallback: "no_image.jpg",class: "temples-image" %>
+            <p><%= hokkaidou.name %></p>
+            <h4>(<%= hokkaidou.prefecture.name %>)</h4>
+          <% end %>
+        </div>
+        <% end %>
+    </div>
+    <div class="tab-pane fade" id="pills-touhoku" role="tabpanel" aria-labelledby="pills-touhoku-tab">
+        <% @touhokus.each do |touhoku| %>
+        <div class="temples">
+          <%= link_to user_temple_path(touhoku)  do %>
+            <%= attachment_image_tag touhoku, :mainimage, :fill, 350, 270, format: 'jpeg', fallback: "no_image.jpg",class: "temples-image" %>
+            <p><%= touhoku.name %></p>
+            <h4>(<%= touhoku.prefecture.name %>)</h4>
+          <% end %>
+        </div>
+        <% end %>
+    </div>
+    <div class="tab-pane fade" id="pills-kantou" role="tabpanel" aria-labelledby="pills-kantou-tab">
+        <% @kantous.each do |kantou| %>
+                <div class="temples">
+                  <%= link_to user_temple_path(kantou)  do %>
+                    <%= attachment_image_tag kantou, :mainimage, :fill, 350, 270, format: 'jpeg', fallback: "no_image.jpg",class: "temples-image" %>
+                    <p><%= kantou.name %></p>
+                    <h4>(<%= kantou.prefecture.name %>)</h4>
+                  <% end %>
+                </div>
+        <% end %>
+
+    </div>
+    <div class="tab-pane fade" id="pills-tyubu" role="tabpanel" aria-labelledby="pills-tyubu-tab">
+        <% @tyubus.each do |tyubu| %>
+        <div class="temples">
+          <%= link_to user_temple_path(tyubu)  do %>
+            <%= attachment_image_tag tyubu, :mainimage, :fill, 350, 270, format: 'jpeg', fallback: "no_image.jpg",class: "temples-image" %>
+            <p><%= tyubu.name %></p>
+            <h4>(<%= tyubu.prefecture.name %>)</h4>
+          <% end %>
+            </div>
+        <% end %>
+    </div>
+    <div class="tab-pane fade" id="pills-kinki" role="tabpanel" aria-labelledby="pills-kinki-tab">
+        <% @kinkis.each do |kinki| %>
+        <div class="temples">
+          <%= link_to user_temple_path(kinki)  do %>
+            <%= attachment_image_tag kinki, :mainimage, :fill, 350, 270, format: 'jpeg', fallback: "no_image.jpg",class: "temples-image" %>
+            <p><%= kinki.name %></p>
+            <h4>(<%= kinki.prefecture.name %>)</h4>
+          <% end %>
+            </div>
+        <% end %>
+    </div>
+    <div class="tab-pane fade" id="pills-tyugoku" role="tabpanel" aria-labelledby="pills-tyugoku-tab">
+        <% @tyugokus.each do |tyugoku| %>
+        <div class="temples">
+          <%= link_to user_temple_path(tyugoku)  do %>
+            <%= attachment_image_tag tyugoku, :mainimage, :fill, 350, 270, format: 'jpeg', fallback: "no_image.jpg",class: "temples-image" %>
+            <p><%= tyugoku.name %></p>
+            <h4>(<%= tyugoku.prefecture.name %>)</h4>
+          <% end %>
+            </div>
+        <% end %>
+    </div>
+    <div class="tab-pane fade" id="pills-sikoku" role="tabpanel" aria-labelledby="pills-sikoku-tab">
+        <% @sikokus.each do |sikoku| %>
+        <div class="temples">
+          <%= link_to user_temple_path(sikoku)  do %>
+            <%= attachment_image_tag sikoku, :mainimage, :fill, 350, 270, format: 'jpeg', fallback: "no_image.jpg",class: "temples-image" %>
+            <p><%= sikoku.name %></p>
+            <h4>(<%= sikoku.prefecture.name %>)</h4>
+          <% end %>
+            </div>
+        <% end %>
+    </div>
+    <div class="tab-pane fade" id="pills-kyusyu" role="tabpanel" aria-labelledby="pills-kyusyu-tab">
+        <% @kyusyus.each do |kyusyu| %>
+        <div class="temples">
+          <%= link_to user_temple_path(kyusyu)  do %>
+            <%= attachment_image_tag kyusyu, :mainimage, :fill, 350, 270, format: 'jpeg', fallback: "no_image.jpg",class: "temples-image" %>
+            <p><%= kyusyu.name %></p>
+            <h4>(<%= kyusyu.prefecture.name %>)</h4>
+          <% end %>
+            </div>
+        <% end %>
+    </div>
+</div>

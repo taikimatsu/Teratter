@@ -1,0 +1,31 @@
+<h2> Memory編集</h2>
+
+<%= form_for(@memory, :url => {:controller => :memorys, :action => :update}) do |f| %>
+
+	<div>
+		<%= f.collection_select :temple_id, Temple.all.order("name"), :id, :name, :class => "string" %>
+
+	<div>
+		<h3>訪問日時</h3>
+		<%= f.date_select :visit_date %>
+	</div>
+
+	<div>
+		<h3>写真</h3>
+		<%= f.attachment_field :memory_images_images, multiple: true %>
+	</div>
+
+	<div>
+		<h3>参拝した感想</h3>
+		<%= f.text_field :comment %>
+	</div>
+
+	<div>
+		<%= link_to '削除する', user_memory_path , method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-default btn-lg" %>
+	</div>
+
+	<div>
+		<%= f.submit '新規追加' %>
+	</div>
+
+<% end %>
