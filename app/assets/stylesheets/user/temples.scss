@@ -28,12 +28,6 @@
 	text-align: center;
 }
 
-#map {
-    width: 600px;
-    height: 400px;
-    margin: 0 auto;
-}
-
 .balloon{
   position: relative;
   padding: 20px;
@@ -190,4 +184,12 @@
   top: 60px;
   left: 20px;
   font-size: 30px;
+}
+
+#map {
+  height: 400px;
+  margin-left:auto;
+  margin-right:auto;
+  text-align:left;
+  width: 400px;
 }

@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     resources :temples, only: [:index, :show, :new, :edit, :update, :destroy, :create]
   end
   namespace :admin do
+    get 'search', to: 'temples#search'
+    get 'searchform', to: 'temples#searchform'
     resources :users, only: [:index, :show, :edit, :update, :destroy]
   end
   namespace :admin do

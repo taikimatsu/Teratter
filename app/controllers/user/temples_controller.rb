@@ -4,7 +4,7 @@ class User::TemplesController < ApplicationController
 
   def index
     from = Time.now.at_beginning_of_day
-    to = (from + 1.day).at_end_of_day
+    to = (from + 6.day).at_end_of_day
     @all_ranks = Temple.find(Clip.where(created_at: from...to).group(:temple_id).order('count(temple_id) desc').limit(10).pluck(:temple_id))
     @hokkaidous = Temple.where("area = 1")
     @touhokus = Temple.where("area = 2")

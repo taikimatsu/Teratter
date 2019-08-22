@@ -41,7 +41,37 @@
 <div class="tab-content" id="pills-tabContent" style="margin-top : 170px;">
 
     <div class="tab-pane fade show active" id="pills-ranking" role="tabpanel" aria-labelledby="pills-ranking-tab" style="margin-top: 20px;">
-        ランキング
+      <div class="row" style="margin-top: 120px;">
+        <div class="col-lg-2">
+          <% @all_ranks.each.with_index(1) do |temple,i| %>
+          <p style="margin-bottom: 245px; margin-left: 250px; font-size: 35px; ">
+            <i class="fas fa-award" style="color: gold;"><span style="color: black; font-size: 25px; margin-left: 5px;"><%= "#{i}" %></span></i>
+          </p><br>
+          <% end %>
+
+        </div>
+
+        <div class="col-lg-4">
+          <% @all_ranks.each do |temple| %>
+            <div style="font-size: 22px; width: 200px; color: white; background-color:#8b0000; text-align: center;margin-left: 150px; margin-bottom: 265px;">
+                <%= temple.clips.count %><br>
+                <p style="font-size: 15px;">週間お気に入り追加数</p>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="col-lg-6">
+          <% @all_ranks.each do |temple| %>
+            <div class="templeranks">
+              <%= link_to admin_temple_path(temple)  do %>
+                <%= attachment_image_tag temple, :mainimage, :fill, 350, 270, format: 'jpeg', fallback: "no_image.jpg",class: "temples-image" %><br>
+                <p><%= temple.name %></p>
+                <h4>(<%= temple.prefecture.name %>)</h4>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
     <div class="tab-pane fade" id="pills-hokkaidou" role="tabpanel" aria-labelledby="pills-hokkaidou-tab">
         <% @hokkaidous.each do |hokkaidou| %>

@@ -1,2 +1,74 @@
-<h1>Admin::Users#show</h1>
-<p>Find me in app/views/admin/users/show.html.erb</p>
+<div class="row align-items-start" style="margin-top : 120px; margin-bottom: 30px;">
+
+  <div class="col-md-4" style="margin: 40px 50px 0 30px; background: #008c8c; padding: 20px; border: none; border-radius: 30px;">
+    <div class="clearfix" style="border-bottom: dashed 1px white; padding-bottom: 20px;">
+      <div style="float: left; margin-top: 20px;">
+        <%= attachment_image_tag @user, :profile_image, :fill, 150, 150, format: 'jpeg', fallback: "no_image.jpg" ,style: "border-radius: 50%;" %>
+      </div>
+      <div  class="profilelist" style="margin-top: 20px;">
+        <p class="username" style="color: white;">
+          <strong style="margin:10px,0,0,6px; font-size: 25px;"><%= @user.name %></strong>さん
+        </p>
+        <p style="font-size: 20px; color: white;">投稿数：<%= @user.memorys.count %></p><br>
+        <% if @user == current_user %>
+          <%= link_to "ユーザー情報編集", edit_user_user_path, class: "btn btn-info col-md-12 col-md-offset-1",style: "background-color:rgba(255, 108, 0, 0.93); color:black;" %>
+        <% end %>
+      </div>
+    </div>
+    <div style="margin-top: 20px;">
+      <h3 style="margin-bottom: 20px; color: white; border-bottom: solid 1px white; width: 400px; text-align: center;">お気に入り登録したお寺・神社</h3>
+      <% @clips.each do |clip| %>
+        <%= link_to user_temple_path(clip.temple) ,:style=>"color:white;" do %>
+          <div id="box" style="margin-left: 40px; margin-bottom: 20px; width: 160px; float: left;">
+            <table class="clip-box">
+              <tr>
+                <td>
+                  <%= clip.temple.name %>(<%= clip.temple.prefecture.name %>)
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <%= attachment_image_tag clip.temple, :mainimage, :fill, 100, 100, format: 'jpeg',style: "border-radius: 50%; margin-top:10px;" %>
+                </td>
+              </tr>
+            </table>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="col-lg-7" style="margin-top:40px; margin-left: 10px; " >
+    <h2 style="border-bottom: solid 3px #8b0000; text-align: center;">
+      <strong style="font-size: 35px;"><%= @user.name %></strong>さんの<strong style="font-size: 35px;">投稿一覧</strong>
+    </h2>
+    <% @memorys.each do |memory| %>
+      <div class="well" style="margin-top: 30px; border: solid 1px #8b0000; padding: 10px; border-radius: 30px;">
+        <div style="border-bottom: dashed 1px lightgray; ">
+          <%= link_to user_user_path(memory.user) ,:style=>"color:#8b0000;" do %>
+            <%= attachment_image_tag memory.user, :profile_image, :fill, 50, 50, format: 'jpeg',style: "border-radius: 50%;", fallback: "no_image.jpg" %>
+            <strong style="margin:10px,0,0,6px; font-size: 20px;"><%= memory.user.name %></strong>さん<br>
+          <% end %>
+          <p style="margin-bottom: 0px;">投稿日：<%= memory.created_at.strftime("%Y-%m-%d %H:%M") %>
+            <% if memory.user == current_user %>
+              <%= link_to "投稿を削除", user_memory_path(memory), method: :delete, class: "btn btn-info col-md-2 col-md-offset-1",style: "border-radius: 50%; background-color:white; color:#8b0000; margin-left:350px; border: solid 2px #8b0000;" %>
+            <% end %>
+          </p>
+        </div>
+        <h3 style="width: 400px;  margin-top: 10px;">
+          <%= link_to user_temple_path(memory.temple) ,:style=>"color:#8b0000;" do %>
+            <%= memory.temple.name %>(<%= memory.temple.prefecture.name %>)
+          <% end %>
+        </h3>
+        <strong style="font-size: 20px; border-bottom: solid 1px black;"><%= memory.title %></strong><br>
+        <p style="font-size: 15px;">訪問日：<%= memory.visit_date %></p><br>
+        <div style="margin: 0; width: 600px;">
+          <%= simple_format(memory.body) %><br>
+        </div>
+        <% memory.memory_images.each do |image| %>
+          <%= attachment_image_tag image, :image, :fill, 150, 150, format: 'jpeg' %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

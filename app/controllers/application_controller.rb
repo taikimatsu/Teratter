@@ -2,13 +2,6 @@ class ApplicationController < ActionController::Base
 
 	before_action :configure_sign_up_params,if: :devise_controller?
 
-	def after_sign_in_path_for(resource)
-  		user_temples_path
-	end
-
-	def after_sign_out_path_for(resource)
-  		new_user_session_path
-	end
 
 	protected
 	def configure_sign_up_params
@@ -18,4 +11,26 @@ class ApplicationController < ActionController::Base
    def configure_account_update_params
      devise_parameter_sanitizer.permit(:account_update, keys: [:name, :age, :gender])
    end
+
+   private
+
+  # ログイン後のリダイレクト先
+  def after_sign_in_path_for(resource_or_scope)
+    if resource_or_scope.is_a?(Admin)
+      admin_temples_path
+    else
+      user_temples_path
+    end
+  end
+
+  # ログアウト後のリダイレクト先
+  def after_sign_out_path_for(resource_or_scope)
+    if resource_or_scope == :admin
+      new_admin_session_path
+    else
+      new_user_session_path
+    end
+  end
+
+
 end

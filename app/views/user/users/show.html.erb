@@ -1,8 +1,5 @@
 
-<div class="row" style="margin-top : 120px; margin-bottom: 30px;">
-  <% if flash[:notice] %>
-    <p style="text-align: center; font-size: 20px;"><%= flash[:notice] %></p>
-  <% end %>
+<div class="row align-items-start" style="margin-top : 120px; margin-bottom: 30px;">
 
   <div class="col-md-4" style="margin: 40px 50px 0 30px; background: #008c8c; padding: 20px; border: none; border-radius: 30px;">
     <div class="clearfix" style="border-bottom: dashed 1px white; padding-bottom: 20px;">
@@ -23,7 +20,7 @@
       <h3 style="margin-bottom: 20px; color: white; border-bottom: solid 1px white; width: 400px; text-align: center;">お気に入り登録したお寺・神社</h3>
       <% @clips.each do |clip| %>
         <%= link_to user_temple_path(clip.temple) ,:style=>"color:white;" do %>
-          <div id="box" style="margin-left: 40px; margin-bottom: 20px; width: 150px; float: left;">
+          <div id="box" style="margin-left: 40px; margin-bottom: 20px; width: 160px; float: left;">
             <table class="clip-box">
               <tr>
                 <td>
@@ -32,7 +29,7 @@
               </tr>
               <tr>
                 <td>
-                  <%= attachment_image_tag clip.temple, :mainimage, :fill, 100, 100, format: 'jpeg',style: "border-radius: 50%;" %>
+                  <%= attachment_image_tag clip.temple, :mainimage, :fill, 100, 100, format: 'jpeg',style: "border-radius: 50%; margin-top:10px;" %>
                 </td>
               </tr>
             </table>
@@ -43,7 +40,7 @@
   </div>
 
   <div class="col-lg-7" style="margin-top:40px; margin-left: 10px; " >
-    <h3 style="border-bottom: solid 3px #8b0000; text-align: center;">
+    <h2 style="border-bottom: solid 3px #8b0000; text-align: center;">
       <strong style="font-size: 35px;"><%= @user.name %></strong>さんの<strong style="font-size: 35px;">投稿一覧</strong>
     </h2>
     <% @memorys.each do |memory| %>
@@ -70,9 +67,9 @@
             <% end %>
           </p>
         </div>
-        <h3 style="width: 150px; text-align: center; margin-top: 10px;">
+        <h3 style="width: 400px;  margin-top: 10px;">
           <%= link_to user_temple_path(memory.temple) ,:style=>"color:#8b0000;" do %>
-            <%= memory.temple.name %>
+            <%= memory.temple.name %>(<%= memory.temple.prefecture.name %>)
           <% end %>
         </h3>
         <strong style="font-size: 20px; border-bottom: solid 1px black;"><%= memory.title %></strong><br>

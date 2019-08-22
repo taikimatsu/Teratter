@@ -8,7 +8,6 @@
 
 Goriyaku.create(
 [
-	{name: '--未選択--'},
 	{name: '縁結び・恋愛成就'},
 	{name: '安産・子宝'},
 	{name: '合格祈願・学業成就'},
@@ -26,7 +25,7 @@ Goriyaku.create(
 
 Prefecture.create(
 [
-	{name: '--未選択--'},{name: '北海道'},{name: '青森県'},{name: '岩手県'},{name: '宮城県'},
+	{name: '北海道'},{name: '青森県'},{name: '岩手県'},{name: '宮城県'},
 	{name: '秋田県'},{name: '山形県'},{name: '福島県'},{name: '茨城県'},{name: '栃木県'},
 	{name: '群馬県'},{name: '埼玉県'},{name: '千葉県'},{name: '東京都'},{name: '神奈川県'},
 	{name: '新潟県'},{name: '富山県'},{name: '石川県'},{name: '福井県'},{name: '山梨県'},

@@ -1,8 +1,8 @@
-<div style="background-image:url(<%= asset_path "log_in.jpg" %>)" , class="back" >
-<div class="container">
+<div style="background-image:url(<%= asset_path "sign_up.jpg" %>)" , class="back" >
+<div class="container" , style="margin-top: 80px;">
   <div class="row">
-    <div class="col-xs-4">
-    <br><h1 style="text-align: center; color: white;">Sign up</h1><br>
+    <div class="col-xs-4" style="margin-left: 400px; margin-top: 50px;">
+    <br><h1 style="text-align: center; color: navy;">新規登録</h1><br>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
@@ -10,39 +10,44 @@
 
     <div class="row" style="text-align: center;">
       <div class="field col-xs-6">
+        <h3 style="color: navy;">ユーザー名</h2><br/>
         <%= f.text_field :name, autofocus: true, placeholder: "名前" %>
       </div>
     </div>
 
       <div class="field" style="text-align: center;"><br>
-        <p style="color: white;">
+        <p style="color: navy;">
           年齢：<%= f.select :age, User.ages.keys, {},  :prompt => "選択してください" %>
         </p>
       </div>
 
       <div class="field" style="text-align: center;">
-        <p style="color: white;">
+        <p style="color: navy;">
           性別：<%= f.select :gender, User.genders.keys, {}, :prompt => "選択してください" %>
         </p>
       </div>
 
       <div class="field" style="text-align: center;"><br>
+        <h3 style="color: navy;">メールアドレス</h2><br/>
         <%= f.email_field :email, autofocus: true, placeholder: "メールアドレス" %>
       </div>
 
       <div class="field" style="text-align: center;"><br>
+        <h3 style="color: navy;">パスワード</h2><br/>
         <%= f.password_field :password, placeholder: "パスワード" %>
       </div>
 
       <div class="field" style="text-align: center;"><br>
+        <h3 style="color: navy;">パスワード確認</h2><br/>
         <%= f.password_field :password_confirmation,placeholder: "パスワード確認" %>
       </div>
 
-      <div class="actions" style="text-align: center;"><br>
-        <%= f.submit "新規登録", class: "btn btn-info col-md-10 col-md-offset-1" %>
+      <div class="actions" style="text-align: center; margin-bottom: 30px;"><br>
+        <%= f.submit "新規登録", class: "btn btn-info col-md-10 col-md-offset-1", style: "background-color:navy;"%>
       </div>
     <% end %>
     </div>
   </div>
 </div>
 </div>
+

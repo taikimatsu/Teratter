@@ -78,3 +78,5 @@ gem 'ransack'
 gem 'font-awesome-rails'
 
 gem 'kaminari','~> 1.1.1'
+
+gem 'http'

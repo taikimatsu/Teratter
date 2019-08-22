@@ -1,2 +1,27 @@
-<h1>Admin::Users#index</h1>
-<p>Find me in app/views/admin/users/index.html.erb</p>
+<div class="raw" style="margin-top: 140px;">
+	<div class="col-md-6" style="margin: 0 auto; text-align: center;">
+
+		<h1 style="border-bottom: solid 2px #8b0000">ユーザー一覧</h1>
+
+		<table class="table table-hover">
+		　	<thead class="thead-dark">
+				<tr>
+		      		<th scope="col"></th>
+		      		<th scope="col">ユーザー名</th>
+		      		<th scope="col">投稿数</th>
+		    	</tr>
+		    </thead>
+		    <tbody>
+		    	<% @users.each do |user| %>
+		    		<%= link_to admin_user_path(user) do %>
+				    <tr>
+				      <td><%= attachment_image_tag user, :profile_image, :fill, 50, 50, format: 'jpeg',style: "border-radius: 50%;", fallback: "no_image.jpg" %></td>
+				      <td><%= user.name %></td>
+				      <td><%= user.memorys.count %></td>
+				    </tr>
+				    <% end %>
+				<% end %>
+		  	</tbody>
+		</table>
+	</div>
+</div>

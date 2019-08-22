@@ -1,15 +1,19 @@
+<% if flash[:notice] %>
+	<p><%= flash[:notice] %></p>
+<% end %>
 <div class="row" style="margin-top : 120px;">
 
 			<div class="col-lg-4" style="margin-left: 50px;">
 				<div>
 					<div style="font-size: 50px; border-bottom: solid 3px #8b0000; text-align: center;">
-						<%= @temple.name %>
-						<%= link_to "削除", admin_temple_path(@temple), method: :delete, class: "btn btn-info col-md-2 col-md-offset-1" %>
+						<%= @temple.name %><br>
+						<%= link_to "編集", edit_admin_temple_path(@temple), class: "btn btn-info col-md-2 col-md-offset-1" %>
+						<%= link_to "削除", admin_temple_path(@temple), method: :delete, class: "btn btn-info col-md-2 col-md-offset-1", "data-confirm" => "本当に削除しますか？",:style=>"background-color:red;" %>
 					</div>
 					<div id="temple-info"><%= @temple.address %></div>
 					<div id="temple-info">ご利益：<%= @temple.goriyaku.name %></div>
 				</div>
-				<div id="map" style='width: 400px; height: 250px;'></div>
+				<div id="map" style='width: 250px; height: 250px;'></div>
 
 				  <script type="text/javascript">
 				    handler = Gmaps.build('Google');
@@ -30,11 +34,11 @@
 
 				<div class="col-lg-5" style="margin-left: 50px; margin-top: 50px;">
 				    <div class="tab-content" id="nav-tabContent" style="text-align: center; ">
-				      <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+				      <div class="tab-pane fade show active" id="list-mainimage" role="tabpanel" aria-labelledby="list-home-list">
 				      	<%= attachment_image_tag @temple, :mainimage, :fill, 576, 420, format: 'jpeg' %>
 				      </div>
 				      <% @temple.temple_images.each do |image| %>
-					      <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+					      <div class="tab-pane fade" id="list-image-<%=image.id %>" role="tabpanel" aria-labelledby="list-image-list">
 					      	<%= attachment_image_tag image, :image, :fill, 576, 420, format: 'jpeg' %>
 					      </div>
 					  <% end %>
@@ -43,11 +47,11 @@
 
 				<div class="col-lg-2" style="margin-top: 70px;">
 					<div class="list-group  text-center" id="list-tab" role="tablist" style="margin-right: 20px;">
-				      	<a class="list-group-item list-group-item-action active"  data-toggle="list" href="#list-home" role="tab" aria-controls="list-home">
+				      	<a class="list-group-item list-group-item-action active"  data-toggle="list" href="#list-mainimage" role="tab" aria-controls="list-mainimage">
 				      		<%= attachment_image_tag @temple, :mainimage, :fill, 100, 70, format: 'jpeg' %>
 				      	</a>
 				      <% @temple.temple_images.each do |image| %>
-				      	<a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="list-profile">
+				      	<a class="list-group-item list-group-item-action" id="list-image-<%=image.id %>-list" data-toggle="list" href="#list-image-<%=image.id %>" role="tab" aria-controls="list-image">
 				      		<%= attachment_image_tag image, :image, :fill, 100, 70, format: 'jpeg' %>
 				      	</a>
 				      <% end %>

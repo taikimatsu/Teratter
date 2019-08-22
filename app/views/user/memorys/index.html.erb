@@ -25,6 +25,12 @@
         <% @all_ranks.each.with_index(1) do |memory, i| %>
           <div class="row" style="margin-top: 50px;">
             <div class="col-lg-7" style="margin: 0 auto;">
+              <i class="fas fa-award" style="color: gold; font-size: 40px;">
+                <span style="color: black; font-size: 25px; margin-left: 5px;"><%= "#{i}" %>位</span>
+                <span style="font-size: 22px;  color: white; background-color:#8b0000; text-align: center;">
+                  週間いいね数：<%= memory.favorites.count %>
+                </span>
+              </i>
               <div class="well" style="margin-top: 30px; border: solid 1px #8b0000; padding: 10px;">
                  <div style="border-bottom: dashed 1px lightgray; ">
                     <%= link_to user_user_path(memory.user) ,:style=>"color:#8b0000;" do %>
