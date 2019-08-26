@@ -1,8 +1,10 @@
 class User::UsersController < ApplicationController
+  PER = 10
   def show
     @user = User.find(params[:id])
     @clips = Clip.where(user_id: @user.id).all
-    @memorys = @user.memorys
+    @memorys = @user.memorys.page(params[:page]).per(PER).order(created_at: "DESC")
+    @questions = @user.questions.page(params[:page]).per(PER).order(created_at: "DESC")
   end
 
   def edit

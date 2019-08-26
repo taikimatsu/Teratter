@@ -1,7 +1,7 @@
 <!-- ユーザー問合せ画面 -->
 
 <div style="text-align: center; margin-top: 140PX;">
-	<h1 style="border-bottom: solid 3px #8b0000; width: 500px; margin: 40px auto;">お問い合わせ入力フォーム</h1>
+	<h1 style="border-bottom: solid 3px #8b0000; width: 550px; margin: 40px auto;"><i class="far fa-comments">お問い合わせ入力フォーム</i></h1>
 	<p> 投稿したい寺・神社を追加してほしい等、ございましたら下記フォームよりお問い合わせください。<br>
 		返信は、ご登録されている下記のメールアドレス宛にさせていただきます。
 	</p>
@@ -28,7 +28,7 @@
 			</div>
 
 			<div style="margin-top: 10px; margin-bottom: 10px;">
-				<%= f.submit '送信' %>
+				<%= f.submit '送信',:style => "background-color:yellowgreen;" %>
 			</div>
 
 		<% end %>

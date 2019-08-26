@@ -1,7 +1,26 @@
+<div class="templeheader" style="background-color: moccasin; width: 100%; margin: 0 auto; margin-bottom: 5px;">
+    <ul class="nav nav-pills justify-content-center" >
+       <li class="nav-item">
+        <%= link_to  user_temples_path, class: "nav-link" do %>
+          <i class="fas fa-torii-gate"><span style="margin-left: 5px;">寺・神社</span></i>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to  user_memorys_path, class: "nav-link" do %>
+          <i class="fas fa-feather-alt"><span style="margin-left: 5px;">参拝記録</span></i>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to  user_questions_path, class: "nav-link" do %>
+          <i class="fas fa-question-circle"><span style="margin-left: 5px;">質問</span></i>
+        <% end %>
+      </li>
+    </ul>
+</div>
 
-<div class="row align-items-start" style="margin-top : 120px; margin-bottom: 30px;">
+<div class="row align-items-start" style="margin-top : 140px; margin-bottom: 30px;">
 
-  <div class="col-md-4" style="margin: 40px 50px 0 30px; background: #008c8c; padding: 20px; border: none; border-radius: 30px;">
+  <div class="col-md-4" style="margin: 40px 50px 0 30px; background: #660000; padding: 20px; border: none; border-radius: 30px;">
     <div class="clearfix" style="border-bottom: dashed 1px white; padding-bottom: 20px;">
       <div style="float: left; margin-top: 20px;">
         <%= attachment_image_tag @user, :profile_image, :fill, 150, 150, format: 'jpeg', fallback: "no_image.jpg" ,style: "border-radius: 50%;" %>
@@ -12,12 +31,12 @@
         </p>
         <p style="font-size: 20px; color: white;">投稿数：<%= @user.memorys.count %></p><br>
         <% if @user == current_user %>
-          <%= link_to "ユーザー情報編集", edit_user_user_path, class: "btn btn-info col-md-12 col-md-offset-1",style: "background-color:rgba(255, 108, 0, 0.93); color:black;" %>
+          <%= link_to "ユーザー情報編集", edit_user_user_path, class: "btn btn col-md-12 col-md-1",style: "background-color:yellowgreen; color:black;" %>
         <% end %>
       </div>
     </div>
-    <div style="margin-top: 20px;">
-      <h3 style="margin-bottom: 20px; color: white; border-bottom: solid 1px white; width: 400px; text-align: center;">お気に入り登録したお寺・神社</h3>
+    <div class="clearfix" style="border-bottom: dashed 1px white; padding-bottom: 20px; margin-top: 20px;">
+      <h3 style="margin-bottom: 20px; color: white;  width: 400px; "><i class="far fa-star">お気に入り</i></h3>
       <% @clips.each do |clip| %>
         <%= link_to user_temple_path(clip.temple) ,:style=>"color:white;" do %>
           <div id="box" style="margin-left: 40px; margin-bottom: 20px; width: 160px; float: left;">
@@ -36,6 +55,31 @@
           </div>
         <% end %>
       <% end %>
+    </div>
+    <div style="margin-top: 20px; color: white;">
+      <h3 style="margin: 0 auto; color: white;"><i class="fas fa-history">質問</i></h3>
+          <table class="table table-hover" style="margin-top: 20px;">
+            <% @questions.each do |question| %>
+              <tr>
+                <td style="width:100px;">
+                    <%= attachment_image_tag question.user, :profile_image, :fill, 50, 50, format: 'jpeg',style: "border-radius: 50%;" %>
+                </td>
+                <td><%= simple_format(question.body) %></td>
+                <td>
+                  <%= link_to new_user_question_answers_path(question),:style=>"color:yellowgreen;" do %>
+                  <i class="fas fa-reply"></i>
+                  <% end %>
+                </td>
+                <td>
+                  <%= link_to user_question_path(question),:style=>"color:black;" do %>
+                  <i class="far fa-comment-alt" style="color: white;"><strong style="margin-left: 5px;"><%= question.answers.count %></strong></i>
+                  <% end %>
+                </td>
+                <td><%= question.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+              </tr>
+            <% end %>
+          </table>
+          <%= paginate @questions %>
     </div>
   </div>
 
@@ -63,7 +107,9 @@
               <% end %>
             <% end %>
             <% if memory.user == current_user %>
-              <%= link_to "投稿を削除", user_memory_path(memory), method: :delete, class: "btn btn-info col-md-2 col-md-offset-1",style: "border-radius: 50%; background-color:white; color:#8b0000; margin-left:350px; border: solid 2px #8b0000;" %>
+              <%= link_to  user_memory_path(memory), method: :delete,"data-confirm" => "削除しますか？",style: "color:#8b0000; margin-left:350px; font-size:20px;" do %>
+                <i class="fas fa-trash-alt"></i>
+              <% end %>
             <% end %>
           </p>
         </div>
@@ -82,5 +128,6 @@
         <% end %>
       </div>
     <% end %>
+    <%= paginate @memorys %>
   </div>
 </div>

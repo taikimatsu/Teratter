@@ -13,14 +13,13 @@
 		    </thead>
 		    <tbody>
 		    	<% @users.each do |user| %>
-		    		<%= link_to admin_user_path(user) do %>
 				    <tr>
 				      <td><%= attachment_image_tag user, :profile_image, :fill, 50, 50, format: 'jpeg',style: "border-radius: 50%;", fallback: "no_image.jpg" %></td>
-				      <td><%= user.name %></td>
+				      <td><%= link_to admin_user_path(user),:style=>"color:#8b0000;" do%><%= user.name %><% end %></td>
 				      <td><%= user.memorys.count %></td>
 				    </tr>
-				    <% end %>
 				<% end %>
+				<%= paginate @users %>
 		  	</tbody>
 		</table>
 	</div>

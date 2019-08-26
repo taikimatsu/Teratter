@@ -1,0 +1,113 @@
+<div class="templeheader" style="background-color: moccasin; width: 100%; margin: 0 auto; margin-bottom: 5px;">
+    <ul class="nav nav-pills justify-content-center" >
+      <li class="nav-item">
+        <%= link_to  admin_temples_path, class: "nav-link" do %>
+          <i class="fas fa-torii-gate"><span style="margin-left: 5px;">寺・神社</span></i>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to  admin_memorys_path, class: "nav-link" do %>
+          <i class="fas fa-feather-alt"><span style="margin-left: 5px;">参拝記録</span></i>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to  admin_questions_path, class: "nav-link active" do %>
+          <i class="fas fa-question-circle"><span style="margin-left: 5px;">質問</span></i>
+        <% end %>
+      </li>
+    </ul>
+</div>
+
+<div class="navheader" style="margin: 0 auto; background-color: moccasin; width: 100%;">
+    <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="pills-new-tab" data-toggle="pill" href="#pills-new" role="tab" aria-controls="pills-new" aria-selected="true">最新の質問</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-trend-tab" data-toggle="pill" href="#pills-trend" role="tab" aria-controls="pills-trend" aria-selected="false">トレンドの質問</a>
+      </li>
+    </ul>
+</div>
+
+<div class="tab-content" id="pills-tabContent" style="margin-top : 170px;">
+
+    <div class="tab-pane fade show active" id="pills-new" role="tabpanel" aria-labelledby="pills-new-tab" style="margin-top: 20px;">
+        <div class="row align-items-start" style="margin-top: 50px;">
+			<div class="col-lg-7" style="margin: 0 auto;" >
+				<h2 style="margin: 0 auto;">
+					<i class="fas fa-history">質問</i>
+					<%= form_tag admin_questions_path, method: :get do %>
+		              <%= text_field_tag :search, params[:search], placeholder: "キーワード検索",:style=>"width:250px; height:40px; font-size:20px;" %>
+		              <%= submit_tag '検索', :body => nil,:style=>"width:70px; height:40px; font-size:20px;padding:10px 10px;background-color:yellowgreen;" %>
+		            <% end %>
+				 </h2>
+				<table class="table table-hover" style="margin-top: 20px;">
+					<% @questions.each do |question| %>
+						<tr>
+							<td style="width:200px;">
+								<%= link_to admin_user_path(question.user),:style=>"color:#8b0000;" do %>
+									<%= attachment_image_tag question.user, :profile_image, :fill, 50, 50, format: 'jpeg',style: "border-radius: 50%;" %><strong style="margin-left: 20px;"><%= question.user.name %></strong>
+								<% end %>
+							</td>
+							<td><%= simple_format(question.body) %></td>
+							<td>
+								<%= link_to admin_question_path(question),:style=>"color:black;" do %>
+								<i class="far fa-comment-alt"><strong style="margin-left: 5px;"><%= question.answers.count %></strong></i>
+								<% end %>
+							</td>
+							<td>
+								<i class="far fa-eye"><strong style="margin-left: 5px;"><%= question.impressionist_count %></strong></i>
+							</td>
+							<td>
+								<%= question.created_at.strftime("%Y-%m-%d %H:%M") %>
+							</td>
+		                    <td>
+			                    <%= link_to  admin_question_path(question), method: :delete,"data-confirm" => "削除しますか？",style: "color:#8b0000;" do %>
+			                    	<i class="fas fa-trash-alt"></i>
+			                    <% end %>
+		                   	</td>
+						</tr>
+					<% end %>
+				</table>
+				<%= paginate @questions %>
+			</div>
+		</div>
+    </div>
+
+    <div class="tab-pane fade show" id="pills-trend" role="tabpanel" aria-labelledby="pills-trend-tab" style="margin-top: 20px;">
+        <div class="row align-items-start" style="margin-top: 50px;">
+			<div class="col-lg-7" style="margin: 0 auto;">
+				<h2 style="margin: 0 auto;"><i class="fas fa-poll-h">トレンド</i></h2>
+				<table class="table table-hover" style="margin-top: 20px;">
+					<% @most_viewed.each.with_index(1) do |rank| %>
+						<tr>
+							<td style="width:200px;">
+								<%= link_to admin_user_path(rank.user),:style=>"color:#8b0000;" do %>
+									<%= attachment_image_tag rank.user, :profile_image, :fill, 50, 50, format: 'jpeg',style: "border-radius: 50%;" %><strong style="margin-left: 20px;"><%= rank.user.name %></strong>
+								<% end %>
+							</td>
+							<td><%= simple_format(rank.body) %></td>
+							<td>
+								<%= link_to user_question_path(rank),:style=>"color:black;" do %>
+								<i class="far fa-comment-alt"><strong style="margin-left: 5px;"><%= rank.answers.count %></strong></i>
+								<% end %>
+							</td>
+							<td>
+								<i class="far fa-eye"><strong style="margin-left: 5px;"><%= rank.impressionist_count %></strong></i>
+							</td>
+							<td>
+								<%= rank.created_at.strftime("%Y-%m-%d %H:%M") %>
+							</td>
+							<td>
+			                    <%= link_to  admin_question_path(rank), method: :delete,"data-confirm" => "削除しますか？",style: "color:#8b0000;" do %>
+			                    	<i class="fas fa-trash-alt"></i>
+			                    <% end %>
+		                   	</td>
+						</tr>
+					<% end %>
+				</table>
+			</div>
+		</div>
+    </div>
+
+</div>

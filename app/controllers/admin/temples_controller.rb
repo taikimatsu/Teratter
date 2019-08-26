@@ -1,5 +1,6 @@
 class Admin::TemplesController < ApplicationController
     before_action :authenticate_admin!
+     PER = 15
   def new
   	@temple = Temple.new
     @temple.temple_images.build
@@ -19,20 +20,20 @@ class Admin::TemplesController < ApplicationController
     from = Time.now.at_beginning_of_day
     to = (from + 6.day).at_end_of_day
     @all_ranks = Temple.find(Clip.where(created_at: from...to).group(:temple_id).order('count(temple_id) desc').limit(10).pluck(:temple_id))
-    @hokkaidous = Temple.where("area = 1")
-    @touhokus = Temple.where("area = 2")
-    @kantous = Temple.where("area = 3")
-    @tyubus = Temple.where("area = 4")
-    @kinkis = Temple.where("area = 5")
-    @tyugokus = Temple.where("area = 6")
-    @sikokus = Temple.where("area = 7")
-    @kyusyus = Temple.where("area = 8")
+    @hokkaidous = Temple.where("area = 1").page(params[:page]).per(PER)
+    @touhokus = Temple.where("area = 2").page(params[:page]).per(PER)
+    @kantous = Temple.where("area = 3").page(params[:page]).per(PER)
+    @tyubus = Temple.where("area = 4").page(params[:page]).per(PER)
+    @kinkis = Temple.where("area = 5").page(params[:page]).per(PER)
+    @tyugokus = Temple.where("area = 6").page(params[:page]).per(PER)
+    @sikokus = Temple.where("area = 7").page(params[:page]).per(PER)
+    @kyusyus = Temple.where("area = 8").page(params[:page]).per(PER)
   end
 
   def show
     @temple = Temple.find(params[:id])
     @user = current_user
-    @memorys = @temple.memorys
+    @memorys = @temple.memorys.page(params[:page]).per(10).order(created_at: "DESC")
   end
 
   def create
@@ -68,7 +69,7 @@ class Admin::TemplesController < ApplicationController
 
   def search
     @q = Temple.search(search_params)
-    @temples = @q.result(distinct: true)
+    @temples = @q.result(distinct: true).page(params[:page]).per(10).order(created_at: "DESC")
   end
 
   def searchform

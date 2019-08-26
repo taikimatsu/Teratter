@@ -11,5 +11,7 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :clips, dependent: :destroy
   has_many :contacts, dependent: :destroy
+  has_many :questions, dependent: :destroy
+  has_many :answers, dependent: :destroy
   attachment :profile_image
 end

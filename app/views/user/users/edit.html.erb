@@ -1,43 +1,60 @@
-<div class="container" style="margin-top: 140px; text-align: center;">
-	<div class="row">
-		<div class="col-md-6 col-md-offset-3" style="text-align: center;">
-			<h2>ユーザー情報の変更</h2>
-			<div class="form-horizontal" role="form">
-				<%= form_for(@user, :url => {:controller => :users, :action => :update}) do |f| %>
+<div class="templeheader" style="background-color: moccasin; width: 100%; margin: 0 auto; margin-bottom: 5px;">
+    <ul class="nav nav-pills justify-content-center" >
+      <li class="nav-item">
+        <%= link_to  user_temples_path, class: "nav-link" do %>
+          <i class="fas fa-torii-gate"><span style="margin-left: 5px;">寺・神社</span></i>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to  user_memorys_path, class: "nav-link" do %>
+          <i class="fas fa-feather-alt"><span style="margin-left: 5px;">参拝記録</span></i>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to  user_questions_path, class: "nav-link" do %>
+          <i class="fas fa-question-circle"><span style="margin-left: 5px;">質問</span></i>
+        <% end %>
+      </li>
+    </ul>
+</div>
 
-				<div>
-              	<%= f.attachment_field :profile_image %>
-              	</div>
+<div class="row" style="margin-top: 140px;">
+  <div class="col-lg-7" style="margin: 0 auto; text-align: center;">
 
+    <h2 style="border-bottom: solid 2px #8b0000"> ユーザー情報の編集</h2>
 
-              	<div class="row" style="text-align: center;">
-      				<div class="field col-xs-6">
-        				<%= f.text_field :name, autofocus: true, placeholder: "姓" %>
-      				</div>
-    			</div>
+    <%= form_for(@user, :url => {:controller => :users, :action => :update}) do |f| %>
 
-      			<div class="field" style="text-align: center;"><br>
-        			<p style="color: white;">
-          				年齢：<%= f.select :age, User.ages.keys, {},  :prompt => "選択してください" %>
-        			</p>
-      			</div>
+      <div style="margin-top: 30px;">
+        <h3>ユーザー名</h3>
+        <%= f.text_field :name, autofocus: true, placeholder: "ユーザー名" %>
+      </div>
 
-      			<div class="field" style="text-align: center;">
-        			<p style="color: white;">
-          				性別：<%= f.select :gender, User.genders.keys, {}, :prompt => "選択してください" %>
-        			</p>
-      			</div>
+      <div style="margin-top: 30px;">
+        <h3>写真</h3>
+        <%= f.attachment_field :profile_image %>
+      </div>
 
-      			<div class="field" style="text-align: center;"><br>
-        			<%= f.email_field :email, autofocus: true, placeholder: "メールアドレス" %>
-      			</div>
+      <div style="margin-top: 30px;">
+        <h3>メールアドレス</h3>
+        <%= f.email_field :email, autofocus: true, placeholder: "メールアドレス" %>
+      </div>
 
-      			<div class="actions" style="text-align: center;"><br>
-        			<%= f.submit "変更", class: "btn btn-info col-md-10 col-md-offset-1" %>
-      			</div>
-    			<% end %>
+      <div style="margin-top: 30px;">
+        <h3>年齢</h3>
+        <%= f.select :age, User.ages.keys, {},  :prompt => "選択してください" %>
+      </div>
 
-    		</div>
-  		</div>
-	</div>
+      <div style="margin-top: 30px;">
+        <h3>性別</h3>
+        <%= f.select :gender, User.genders.keys, {}, :prompt => "選択してください" %>
+      </div>
+
+      <div style="margin-top: 40px;">
+        <%= f.submit '変更' ,:style => "background-color:yellowgreen;" %>
+      </div>
+
+    <% end %>
+
+  </div>
 </div>

@@ -1,31 +1,56 @@
-<h2> Memory編集</h2>
+<div class="templeheader" style="background-color: moccasin; width: 100%; margin: 0 auto; margin-bottom: 5px;">
+    <ul class="nav nav-pills justify-content-center" >
+      <li class="nav-item">
+        <%= link_to  user_temples_path, class: "nav-link" do %>
+          <i class="fas fa-torii-gate"><span style="margin-left: 5px;">寺・神社</span></i>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to  user_memorys_path, class: "nav-link active" do %>
+          <i class="fas fa-feather-alt"><span style="margin-left: 5px;">参拝記録</span></i>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to  user_questions_path, class: "nav-link" do %>
+          <i class="fas fa-question-circle"><span style="margin-left: 5px;">質問</span></i>
+        <% end %>
+      </li>
+    </ul>
+</div>
 
-<%= form_for(@memory, :url => {:controller => :memorys, :action => :update}) do |f| %>
+<div class="row" style="margin-top: 140px;">
+	<div class="col-lg-7" style="margin: 0 auto; text-align: center;">
 
-	<div>
-		<%= f.collection_select :temple_id, Temple.all.order("name"), :id, :name, :class => "string" %>
+		<h2 style="border-bottom: solid 2px #8b0000"><%= @memory.temple.name %> Memory編集</h2>
 
-	<div>
-		<h3>訪問日時</h3>
-		<%= f.date_select :visit_date %>
+		<%= form_for(@memory, :url => {:controller => :memorys, :action => :update}) do |f| %>
+
+			<div style="margin-top: 30px;">
+				<h3>訪問日時</h3>
+				<%= f.date_select :visit_date %>
+			</div>
+
+			<div style="margin-top: 30px;">
+				<h3>写真</h3>
+				<%= f.attachment_field :memory_images_images, multiple: true %>
+				<% @memory.memory_images.each do |image| %>
+			        <%= attachment_image_tag image, :image, :fill, 100, 100, format: 'jpeg' %>
+			    <% end %>
+			</div>
+
+			<div style="margin-top: 30px;">
+				<h3>参拝した感想</h3>
+				<%= f.text_field :body %>
+			</div>
+
+			<div style="margin-top: 40px;">
+				<%= f.submit '更新' ,:style => "background-color:yellowgreen;" %>
+				<%= link_to  user_memory_path , method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-default btn-lg",:style=>"color:#8b0000;" do %>
+					<i class="fas fa-trash-alt"></i>
+				<% end %>
+			</div>
+
+		<% end %>
+
 	</div>
-
-	<div>
-		<h3>写真</h3>
-		<%= f.attachment_field :memory_images_images, multiple: true %>
-	</div>
-
-	<div>
-		<h3>参拝した感想</h3>
-		<%= f.text_field :comment %>
-	</div>
-
-	<div>
-		<%= link_to '削除する', user_memory_path , method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-default btn-lg" %>
-	</div>
-
-	<div>
-		<%= f.submit '新規追加' %>
-	</div>
-
-<% end %>
+</div>

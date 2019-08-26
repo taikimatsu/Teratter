@@ -1,7 +1,8 @@
 class Admin::ContactsController < ApplicationController
   before_action :authenticate_admin!
+  PER = 10
   def index
-  	@contacts = Contact.all.order(id: 'DESC')
+  	@contacts = Contact.page(params[:page]).per(PER).order(created_at: "DESC")
   end
 
   def show

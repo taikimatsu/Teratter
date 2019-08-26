@@ -1,14 +1,27 @@
 <div class="templeheader" style="background-color: moccasin; width: 100%; margin: 0 auto; margin-bottom: 5px;">
     <ul class="nav nav-pills justify-content-center" >
-      <li class="nav-item"><%= link_to "寺・神社", user_temples_path, class: "nav-link" %></li>
-      <li class="nav-item"><%= link_to "参拝記録", user_memorys_path, class: "nav-link active" %></li>
+      <li class="nav-item">
+        <%= link_to  user_temples_path, class: "nav-link" do %>
+          <i class="fas fa-torii-gate"><span style="margin-left: 5px;">寺・神社</span></i>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to  user_memorys_path, class: "nav-link active" do %>
+          <i class="fas fa-feather-alt"><span style="margin-left: 5px;">参拝記録</span></i>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to  user_questions_path, class: "nav-link" do %>
+          <i class="fas fa-question-circle"><span style="margin-left: 5px;">質問</span></i>
+        <% end %>
+      </li>
     </ul>
 </div>
 
 <div class="navheader" style="margin: 0 auto; background-color: moccasin; width: 100%;">
     <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
       <li class="nav-item">
-        <a class="nav-link active" id="pills-ranking-tab" data-toggle="pill" href="#pills-ranking" role="tab" aria-controls="pills-ranking"   aria-selected="true">週間いいねランキング
+        <a class="nav-link active" id="pills-ranking-tab" data-toggle="pill" href="#pills-ranking" role="tab" aria-controls="pills-ranking"   aria-selected="true"><i class="fas fa-crown"><span style="margin-left: 5px;">週間いいねランキング</span></i>
         </a>
       </li>
       <li class="nav-item">
@@ -39,12 +52,12 @@
                     <% end %>
                     <p style="margin-bottom: 0px;">投稿日：<%= memory.created_at.strftime("%Y-%m-%d %H:%M") %>
                       <% if memory.favorited_by?(current_user) %>
-                              <%= link_to user_memory_favorites_path(memory), method: :delete,:style=>"color:#e83b69;" do %>
+                              <%= link_to user_memory_favorites_path(memory), method: :delete,:style=>"color:#e83b69;text-decoration: none;" do %>
                                 <i class="fa fa-heart" aria-hidden="true" style="color: #e83b69; font-size: 20px; margin-left: 30px;"></i>
                                 <strong style="color: #e83b69; font-size: 20px; margin-left: 5px;"><%= memory.favorites.count %></strong>
                                 <% end %>
                         <% else %>
-                              <%= link_to user_memory_favorites_path(memory), method: :post,:style=>"color:#e83b69;" do %>
+                              <%= link_to user_memory_favorites_path(memory), method: :post,:style=>"color:#e83b69; text-decoration: none;" do %>
                                 <i class="far fa-heart" aria-hidden="true" style="font-size: 20px; color: #e83b69; margin-left: 30px;"></i>
                                 <strong style="color: #e83b69; font-size: 20px; margin-left: 5px;"><%= memory.favorites.count %></strong>
                               <% end %>
@@ -83,19 +96,23 @@
                     <% end %>
                     <p style="margin-bottom: 0px;">投稿日：<%= memory.created_at.strftime("%Y-%m-%d %H:%M") %>
                       <% if memory.favorited_by?(current_user) %>
-                              <%= link_to user_memory_favorites_path(memory), method: :delete,:style=>"color:#e83b69;" do %>
+                              <%= link_to user_memory_favorites_path(memory), method: :delete,:style=>"color:#e83b69; text-decoration: none;" do %>
                                 <i class="fa fa-heart" aria-hidden="true" style="color: #e83b69; font-size: 20px; margin-left: 30px;"></i>
                                 <strong style="color: #e83b69; font-size: 20px; margin-left: 5px;"><%= memory.favorites.count %></strong>
                                 <% end %>
                         <% else %>
-                              <%= link_to user_memory_favorites_path(memory), method: :post,:style=>"color:#e83b69;" do %>
+                              <%= link_to user_memory_favorites_path(memory), method: :post,:style=>"color:#e83b69; text-decoration: none;" do %>
                                 <i class="far fa-heart" aria-hidden="true" style="font-size: 20px; color: #e83b69; margin-left: 30px;"></i>
                                 <strong style="color: #e83b69; font-size: 20px; margin-left: 5px;"><%= memory.favorites.count %></strong>
                               <% end %>
                       <% end %>
                       <% if memory.user == current_user %>
-                        <%= link_to "編集", edit_user_memory_path(memory), class: "btn btn-info col-md-1 col-md-offset-1", style: "margin-left: 30px;" %>
-                        <%= link_to "削除", user_memory_path(memory), method: :delete, class: "btn btn-info col-md-1 col-md-offset-1","data-confirm" => "本当に削除しますか？" %>
+                        <%= link_to  edit_user_memory_path(memory), style: "margin-left: 150px; color:#8b0000;" do %>
+                          <i class="fas fa-edit"></i>
+                        <% end %>
+                        <%= link_to  user_memory_path(memory), method: :delete,"data-confirm" => "削除しますか？",style: "color:#8b0000; margin-left:30px;" do %>
+                          <i class="fas fa-trash-alt"></i>
+                        <% end %>
                       <% end %>
                     </p>
                 </div>
@@ -117,5 +134,6 @@
             </div>
           </div>
         <% end %>
+        <div style="margin-left: 650px; margin-top: 20px; color:#8b0000; "><%= paginate @memorys %></div>
     </div>
 </div>

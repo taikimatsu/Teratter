@@ -1,31 +1,58 @@
-<div style="text-align: center; margin-top: 140px;">
-<%= search_form_for(@q, :url => {:controller => :temples, :action => :search}) do |f| %>
-
-  <div style="margin-bottom: 20px;">
-    <h2>検索</h2>
-  </div>
-
-  <div>
-  <%# start 特定の文字列で始まる商品名で検索 %>
-  <%= f.label :name_cont, "寺・神社名" %>
-  <%= f.search_field :name_cont %>
-  </div>
-  <br />
-
-  <div>
-  <%= f.label :prefecture_id_eq, "都道府県名" %>
-  <%= f.collection_select :prefecture_id_eq, @prefectures, :id, :name, :include_blank => '指定なし'%>
-  </div>
-  <br />
-
-  <div>
-  <%= f.label :goriyaku_id_eq, "ご利益名" %>
-  <%= f.collection_select :goriyaku_id_eq, @goriyakus, :id, :name, :include_blank => '指定なし'%>
+<div class="templeheader" style="background-color: moccasin; width: 100%; margin: 0 auto; margin-bottom: 5px;">
+    <ul class="nav nav-pills justify-content-center" >
+      <li class="nav-item">
+        <%= link_to  user_temples_path, class: "nav-link active" do %>
+          <i class="fas fa-torii-gate"><span style="margin-left: 5px;">寺・神社</span></i>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to  user_memorys_path, class: "nav-link" do %>
+          <i class="fas fa-feather-alt"><span style="margin-left: 5px;">参拝記録</span></i>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to  user_questions_path, class: "nav-link" do %>
+          <i class="fas fa-question-circle"><span style="margin-left: 5px;">質問</span></i>
+        <% end %>
+      </li>
+    </ul>
 </div>
-  <br />
 
-  <%# 検索ボタン %>
-  <%= f.submit %>
-<% end %>
+<div class="row">
+  <div class="col-lg-7" style="margin: 0 auto; margin-top: 30px;">
+    <div style="text-align: center; margin-top: 140px;">
+      <%= search_form_for(@q, :url => {:controller => :temples, :action => :search}) do |f| %>
+
+        <div style="margin-bottom: 20px;">
+          <h2><i class="fas fa-search-plus">検索</i></h2>
+        </div>
+
+        <div style="margin-top: 50px;">
+          <%# start 特定の文字列で始まる商品名で検索 %>
+          <h3><i class="fas fa-torii-gate"><%= f.label :name_cont, "寺・神社名" %></i></h3>
+          <%= f.search_field :name_cont %>
+        </div>
+        <br />
+
+        <div>
+          <h3><i class="fas fa-money-bill-wave-alt"><%= f.label :prefecture_id_eq, "都道府県名" %></i></h3>
+          <%= f.collection_select :prefecture_id_eq, @prefectures, :id, :name, :include_blank => '指定なし'%>
+        </div>
+        <br />
+
+        <div>
+          <h3><i class="fas fa-praying-hands"><%= f.label :goriyaku_id_eq, "ご利益名" %></i></h3>
+          <%= f.collection_select :goriyaku_id_eq, @goriyakus, :id, :name, :include_blank => '指定なし'%>
+        </div>
+        <br />
+
+        <%# 検索ボタン %>
+        <div style="margin-top: 50px;">
+          <%= f.submit '検索する' ,:style => "background-color:yellowgreen;"%>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
 </div>
 

@@ -1,13 +1,16 @@
 class Admin::UsersController < ApplicationController
 	before_action :authenticate_admin!
+  PER = 10
+
   def index
-  	@users = User.all
+  	@users = User.page(params[:page]).per(20)
   end
 
   def show
     @user = User.find(params[:id])
-    @clips = Clip.where(user_id: @user.id).all
-    @memorys = @user.memorys
+    @clips = Clip.where(user_id: @user.id).page(params[:page]).per(PER)
+    @memorys = @user.memorys.page(params[:page]).per(10)
+    @questions = @user.questions.page(params[:page]).per(PER).order(created_at: "DESC")
   end
 
   def edit

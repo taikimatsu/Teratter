@@ -15,7 +15,7 @@
         <% end %>
       </div>
     </div>
-    <div style="margin-top: 20px;">
+    <div class="clearfix"style="margin-top: 20px;">
       <h3 style="margin-bottom: 20px; color: white; border-bottom: solid 1px white; width: 400px; text-align: center;">お気に入り登録したお寺・神社</h3>
       <% @clips.each do |clip| %>
         <%= link_to user_temple_path(clip.temple) ,:style=>"color:white;" do %>
@@ -35,6 +35,26 @@
           </div>
         <% end %>
       <% end %>
+    </div>
+    <div style="margin-top: 20px; color: white;">
+      <h3 style="margin: 0 auto; color: white;"><i class="fas fa-history">質問</i></h3>
+          <table class="table table-hover" style="margin-top: 20px;">
+            <% @questions.each do |question| %>
+              <tr>
+                <td style="width:100px;">
+                    <%= attachment_image_tag question.user, :profile_image, :fill, 50, 50, format: 'jpeg',style: "border-radius: 50%;" %>
+                </td>
+                <td><%= simple_format(question.body) %></td>
+                <td>
+                  <%= link_to admin_question_path(question),:style=>"color:black;" do %>
+                  <i class="far fa-comment-alt" style="color: white;"><strong style="margin-left: 5px;"><%= question.answers.count %></strong></i>
+                  <% end %>
+                </td>
+                <td><%= question.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+              </tr>
+            <% end %>
+          </table>
+          <%= paginate @questions %>
     </div>
   </div>
 
@@ -70,5 +90,6 @@
         <% end %>
       </div>
     <% end %>
+    <%= paginate @memorys %>
   </div>
 </div>

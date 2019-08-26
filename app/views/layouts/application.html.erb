@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
   <head>
-    <title>てらったー</title>
+    <title>Teratter</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.0/css/all.css" >
@@ -17,12 +17,12 @@
           <% if admin_signed_in? %>
             <%= link_to admin_temples_path,:style=>"text-decoration: none;" do %>
               <i class="fas fa-torii-gate" style="color:#6b8e23; font-size: 25px;"></i>
-              <%= image_tag '/assets/logo.jpg',size: "150x35"   %>
+              <%= image_tag '/images/logo.jpg',size: "150x35"   %>
             <% end %>
           <% else %>
             <%= link_to user_temples_path,:style=>"text-decoration: none;" do %>
               <i class="fas fa-torii-gate" style="color:#6b8e23; font-size: 25px;"></i>
-              <%= image_tag '/assets/logo.jpg',size: "150x35"   %>
+              <%= image_tag '/images/logo.jpg',size: "150x35"   %>
             <% end %>
           <% end %>
         </p>
@@ -102,9 +102,11 @@
     </header>
 
     <%= yield %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.4/css/all.css">
+    <div id="page_top"><a href="#"></a></div>
     <% if user_signed_in? %>
       <%= link_to new_user_contact_path ,:style=>"color:moccasin;" do %>
-        <i class="fas fa-comment-dots" data-toggle="tooltip" data-placement="top" title="上に出るツールチップ" style="font-size: 50px; color: yellowgreen; position: fixed; bottom: 50px; right: 30px;"></i>
+        <i class="fas fa-comment-dots" data-toggle="tooltip" data-placement="top" title="上に出るツールチップ" style="font-size: 50px; color: yellowgreen; position: fixed; bottom: 100px; right: 30px;"></i>
       <% end %>
     <% end %>
 

@@ -1,5 +1,23 @@
-
-	<div class="row" style="margin-top : 120px;">
+<div class="templeheader" style="background-color: moccasin; width: 100%; margin: 0 auto; margin-bottom: 5px;">
+    <ul class="nav nav-pills justify-content-center" >
+      <li class="nav-item">
+        <%= link_to  user_temples_path, class: "nav-link active" do %>
+          <i class="fas fa-torii-gate"><span style="margin-left: 5px;">寺・神社</span></i>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to  user_memorys_path, class: "nav-link" do %>
+          <i class="fas fa-feather-alt"><span style="margin-left: 5px;">参拝記録</span></i>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to  user_questions_path, class: "nav-link" do %>
+          <i class="fas fa-question-circle"><span style="margin-left: 5px;">質問</span></i>
+        <% end %>
+      </li>
+    </ul>
+</div>
+	<div class="row" style="margin-top : 150px;">
 
 			<div class="col-lg-4" style="margin-left: 50px;">
 				<div>
@@ -15,8 +33,10 @@
     							<% end %>
 						<% end %>
 					</div>
-					<div id="temple-info"><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i><%= @temple.address %></div>
-					<div id="temple-info">ご利益：<%= @temple.goriyaku.name %></div>
+					<div id="temple-info">
+						<i class="fas fa-map-marker-alt"><%= @temple.address %></i><br>
+						<i class="fas fa-praying-hands" style="margin-top: 20px;margin-right: 75px;">ご利益：<%= @temple.goriyaku.name %></i>
+					</div>
 				</div>
 				<div id=map></div>
 
@@ -67,19 +87,20 @@
 				<p style="margin-bottom: 0px;">投稿日：<%= memory.created_at.strftime("%Y-%m-%d %H:%M") %>
 					<% if memory.favorited_by?(current_user) %>
     							<%= link_to user_memory_favorites_path(memory), method: :delete do %>
-      							<i class="fa fa-heart" aria-hidden="true" style="color: navy; font-size: 20px; margin-left: 30px;"></i>
+      							<i class="fa fa-heart" aria-hidden="true" style="color:#e83b69; font-size: 20px; margin-left: 30px;"></i>
       							<strong style="color: black; font-size: 20px; margin-left: 5px;"><%= memory.favorites.count %></strong>
   			  					<% end %>
 						<% else %>
     							<%= link_to user_memory_favorites_path(memory), method: :post do %>
-      							<i class="far fa-heart" aria-hidden="true" style="font-size: 20px; color: navy; margin-left: 30px;"></i>
+      							<i class="far fa-heart" aria-hidden="true" style="font-size: 20px; color:#e83b69; margin-left: 30px;"></i>
       							<strong style="color: black; font-size: 20px; margin-left: 5px;"><%= memory.favorites.count %></strong>
     							<% end %>
 					<% end %>
 					<% if memory.user == current_user %>
-						<%= link_to "編集", edit_user_memory_path(memory), class: "btn btn-info col-md-1 col-md-offset-1", style: "margin-left: 30px;" %>
-						<%= link_to "削除", user_memory_path(memory), method: :delete, class: "btn btn-info col-md-1 col-md-offset-1" %>
-					<% end %>
+		              <%= link_to  user_memory_path(memory), method: :delete,"data-confirm" => "削除しますか？",style: "color:#8b0000; margin-left:350px; font-size:20px;" do %>
+		                <i class="fas fa-trash-alt"></i>
+		              <% end %>
+		            <% end %>
 				</p>
 				</div>
 				<strong style="font-size: 20px; border-bottom: solid 1px black;"><%= memory.title %></strong><br>

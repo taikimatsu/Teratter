@@ -1,14 +1,27 @@
 <div class="templeheader" style="background-color: moccasin; width: 100%; margin: 0 auto; margin-bottom: 5px;">
     <ul class="nav nav-pills justify-content-center" >
-      <li class="nav-item"><%= link_to "寺・神社", user_temples_path, class: "nav-link active" %></li>
-      <li class="nav-item"><%= link_to "参拝記録", user_memorys_path, class: "nav-link" %></li>
+      <li class="nav-item">
+        <%= link_to  user_temples_path, class: "nav-link active" do %>
+          <i class="fas fa-torii-gate"><span style="margin-left: 5px;">寺・神社</span></i>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to  user_memorys_path, class: "nav-link" do %>
+          <i class="fas fa-feather-alt"><span style="margin-left: 5px;">参拝記録</span></i>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to  user_questions_path, class: "nav-link" do %>
+          <i class="fas fa-question-circle"><span style="margin-left: 5px;">質問</span></i>
+        <% end %>
+      </li>
     </ul>
 </div>
 
 <div class="navheader" style="margin: 0 auto; background-color: moccasin; width: 100%;">
     <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
       <li class="nav-item">
-        <a class="nav-link active" id="pills-ranking-tab" data-toggle="pill" href="#pills-ranking" role="tab" aria-controls="pills-ranking" aria-selected="true">週間お気に入りランキング</a>
+        <a class="nav-link active" id="pills-ranking-tab" data-toggle="pill" href="#pills-ranking" role="tab" aria-controls="pills-ranking" aria-selected="true"><i class="fas fa-crown"><span style="margin-left: 5px;">週間お気に入りランキング</span></i></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" id="pills-hokkaidou-tab" data-toggle="pill" href="#pills-hokkaidou" role="tab" aria-controls="pills-hollaidou" aria-selected="false">北海道</a>
@@ -44,7 +57,7 @@
       <div class="row" style="margin-top: 120px;">
         <div class="col-lg-2">
           <% @all_ranks.each.with_index(1) do |temple,i| %>
-          <p style="margin-bottom: 245px; margin-left: 250px; font-size: 35px; ">
+          <p style="margin-bottom: 245px; margin-left: 230px; font-size: 35px; ">
             <i class="fas fa-award" style="color: gold;"><span style="color: black; font-size: 25px; margin-left: 5px;"><%= "#{i}" %></span></i>
           </p><br>
           <% end %>
@@ -74,28 +87,39 @@
       </div>
     </div>
     <div class="tab-pane fade" id="pills-hokkaidou" role="tabpanel" aria-labelledby="pills-hokkaidou-tab">
-        <% @hokkaidous.each do |hokkaidou| %>
-        <div class="temples">
-          <%= link_to user_temple_path(hokkaidou)  do %>
-            <%= attachment_image_tag hokkaidou, :mainimage, :fill, 350, 270, format: 'jpeg', fallback: "no_image.jpg",class: "temples-image" %>
-            <p><%= hokkaidou.name %></p>
-            <h4>(<%= hokkaidou.prefecture.name %>)</h4>
+        <div class="clearfix">
+          <% @hokkaidous.each do |hokkaidou| %>
+          <div class="temples">
+            <%= link_to user_temple_path(hokkaidou)  do %>
+              <%= attachment_image_tag hokkaidou, :mainimage, :fill, 350, 270, format: 'jpeg', fallback: "no_image.jpg",class: "temples-image" %>
+              <p><%= hokkaidou.name %></p>
+              <h4>(<%= hokkaidou.prefecture.name %>)</h4>
+            <% end %>
+          </div>
           <% end %>
         </div>
-        <% end %>
+        <div style="margin: 0 auto; width: 18%;">
+          <%= paginate @hokkaidous %>
+        </div>
     </div>
     <div class="tab-pane fade" id="pills-touhoku" role="tabpanel" aria-labelledby="pills-touhoku-tab">
-        <% @touhokus.each do |touhoku| %>
-        <div class="temples">
-          <%= link_to user_temple_path(touhoku)  do %>
-            <%= attachment_image_tag touhoku, :mainimage, :fill, 350, 270, format: 'jpeg', fallback: "no_image.jpg",class: "temples-image" %>
-            <p><%= touhoku.name %></p>
-            <h4>(<%= touhoku.prefecture.name %>)</h4>
+        <div class="clearfix">
+          <% @touhokus.each do |touhoku| %>
+          <div class="temples">
+            <%= link_to user_temple_path(touhoku)  do %>
+              <%= attachment_image_tag touhoku, :mainimage, :fill, 350, 270, format: 'jpeg', fallback: "no_image.jpg",class: "temples-image" %>
+              <p><%= touhoku.name %></p>
+              <h4>(<%= touhoku.prefecture.name %>)</h4>
+            <% end %>
+          </div>
           <% end %>
         </div>
-        <% end %>
+        <div style="margin: 0 auto; width: 18%;">
+          <%= paginate @touhokus %>
+        </div>
     </div>
     <div class="tab-pane fade" id="pills-kantou" role="tabpanel" aria-labelledby="pills-kantou-tab">
+      <div class="clearfix">
         <% @kantous.each do |kantou| %>
                 <div class="temples">
                   <%= link_to user_temple_path(kantou)  do %>
@@ -105,61 +129,90 @@
                   <% end %>
                 </div>
         <% end %>
-
+      </div>
+      <div style="margin: 0 auto; width: 18%;">
+        <%= paginate @kantous %>
+      </div>
+      </div>
     </div>
     <div class="tab-pane fade" id="pills-tyubu" role="tabpanel" aria-labelledby="pills-tyubu-tab">
-        <% @tyubus.each do |tyubu| %>
-        <div class="temples">
-          <%= link_to user_temple_path(tyubu)  do %>
-            <%= attachment_image_tag tyubu, :mainimage, :fill, 350, 270, format: 'jpeg', fallback: "no_image.jpg",class: "temples-image" %>
-            <p><%= tyubu.name %></p>
-            <h4>(<%= tyubu.prefecture.name %>)</h4>
+        <div class="clearfix">
+          <% @tyubus.each do |tyubu| %>
+          <div class="temples">
+            <%= link_to user_temple_path(tyubu)  do %>
+              <%= attachment_image_tag tyubu, :mainimage, :fill, 350, 270, format: 'jpeg', fallback: "no_image.jpg",class: "temples-image" %>
+              <p><%= tyubu.name %></p>
+              <h4>(<%= tyubu.prefecture.name %>)</h4>
+            <% end %>
+              </div>
           <% end %>
-            </div>
-        <% end %>
+        </div>
+        <div style="margin: 0 auto; width: 18%;">
+          <%= paginate @tyubus %>
+        </div>
     </div>
     <div class="tab-pane fade" id="pills-kinki" role="tabpanel" aria-labelledby="pills-kinki-tab">
-        <% @kinkis.each do |kinki| %>
-        <div class="temples">
-          <%= link_to user_temple_path(kinki)  do %>
-            <%= attachment_image_tag kinki, :mainimage, :fill, 350, 270, format: 'jpeg', fallback: "no_image.jpg",class: "temples-image" %>
-            <p><%= kinki.name %></p>
-            <h4>(<%= kinki.prefecture.name %>)</h4>
+        <div class="clearfix">
+          <% @kinkis.each do |kinki| %>
+          <div class="temples">
+            <%= link_to user_temple_path(kinki)  do %>
+              <%= attachment_image_tag kinki, :mainimage, :fill, 350, 270, format: 'jpeg', fallback: "no_image.jpg",class: "temples-image" %>
+              <p><%= kinki.name %></p>
+              <h4>(<%= kinki.prefecture.name %>)</h4>
+            <% end %>
+              </div>
           <% end %>
-            </div>
-        <% end %>
+        </div>
+        <div style="margin: 0 auto; width: 18%;">
+          <%= paginate @kinkis %>
+        </div>
     </div>
     <div class="tab-pane fade" id="pills-tyugoku" role="tabpanel" aria-labelledby="pills-tyugoku-tab">
-        <% @tyugokus.each do |tyugoku| %>
-        <div class="temples">
-          <%= link_to user_temple_path(tyugoku)  do %>
-            <%= attachment_image_tag tyugoku, :mainimage, :fill, 350, 270, format: 'jpeg', fallback: "no_image.jpg",class: "temples-image" %>
-            <p><%= tyugoku.name %></p>
-            <h4>(<%= tyugoku.prefecture.name %>)</h4>
+        <div class="clearfix">
+          <% @tyugokus.each do |tyugoku| %>
+          <div class="temples">
+            <%= link_to user_temple_path(tyugoku)  do %>
+              <%= attachment_image_tag tyugoku, :mainimage, :fill, 350, 270, format: 'jpeg', fallback: "no_image.jpg",class: "temples-image" %>
+              <p><%= tyugoku.name %></p>
+              <h4>(<%= tyugoku.prefecture.name %>)</h4>
+            <% end %>
+              </div>
           <% end %>
-            </div>
-        <% end %>
+        </div>
+        <div style="margin: 0 auto; width: 18%;">
+          <%= paginate @tyugokus %>
+        </div>
     </div>
     <div class="tab-pane fade" id="pills-sikoku" role="tabpanel" aria-labelledby="pills-sikoku-tab">
-        <% @sikokus.each do |sikoku| %>
-        <div class="temples">
-          <%= link_to user_temple_path(sikoku)  do %>
-            <%= attachment_image_tag sikoku, :mainimage, :fill, 350, 270, format: 'jpeg', fallback: "no_image.jpg",class: "temples-image" %>
-            <p><%= sikoku.name %></p>
-            <h4>(<%= sikoku.prefecture.name %>)</h4>
+        <div class="clearfix">
+          <% @sikokus.each do |sikoku| %>
+          <div class="temples">
+            <%= link_to user_temple_path(sikoku)  do %>
+              <%= attachment_image_tag sikoku, :mainimage, :fill, 350, 270, format: 'jpeg', fallback: "no_image.jpg",class: "temples-image" %>
+              <p><%= sikoku.name %></p>
+              <h4>(<%= sikoku.prefecture.name %>)</h4>
+            <% end %>
+              </div>
           <% end %>
-            </div>
-        <% end %>
+        </div>
+        <div style="margin: 0 auto; width: 18%;">
+          <%= paginate @sikokus %>
+        </div>
     </div>
     <div class="tab-pane fade" id="pills-kyusyu" role="tabpanel" aria-labelledby="pills-kyusyu-tab">
-        <% @kyusyus.each do |kyusyu| %>
-        <div class="temples">
-          <%= link_to user_temple_path(kyusyu)  do %>
-            <%= attachment_image_tag kyusyu, :mainimage, :fill, 350, 270, format: 'jpeg', fallback: "no_image.jpg",class: "temples-image" %>
-            <p><%= kyusyu.name %></p>
-            <h4>(<%= kyusyu.prefecture.name %>)</h4>
+        <div class="clearfix">
+          <% @kyusyus.each do |kyusyu| %>
+          <div class="temples">
+            <%= link_to user_temple_path(kyusyu)  do %>
+              <%= attachment_image_tag kyusyu, :mainimage, :fill, 350, 270, format: 'jpeg', fallback: "no_image.jpg",class: "temples-image" %>
+              <p><%= kyusyu.name %></p>
+              <h4>(<%= kyusyu.prefecture.name %>)</h4>
+            <% end %>
+              </div>
           <% end %>
-            </div>
-        <% end %>
+        </div>
+        <div style="margin: 0 auto; width: 18%;">
+          <%= paginate @kyusyus %>
+        </div>
     </div>
 </div>
