@@ -11,7 +11,7 @@
   </head>
   <body>
     <div id="wrapper">
-  	<header id="header" class="header">
+  	 <header id="header" class="header">
       <nav class="navbar navbar-expand-lg" style="background-color: #8b0000">
         <p class="headertitle">
           <% if admin_signed_in? %>
@@ -29,46 +29,48 @@
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
           <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="Navber">
-            <% if user_signed_in? %>
+          <% if user_signed_in? %>
             <ul class="nav navbar-nav">
               <li>
                 <%= link_to user_searchform_path,:style=>"margin-left:900px;" do %>
-                <i class="fas fa-search-plus classname"></i>
-              <% end %>
+                  <i class="fas fa-search-plus classname"></i>
+                <% end %>
               </li>
               <li>
-                  <div class="hidden_box">
-                    <label for="label1">
-                      <%= attachment_image_tag current_user, :profile_image, :size =>'40x40', format: 'jpeg',style: "border-radius: 50%;", fallback: "no_image.jpg",:class=>"icon" %>
-                    </label>
+                <div class="hidden_box">
+                  <label for="label1">
+                    <%= attachment_image_tag current_user, :profile_image, :size =>'40x40', format: 'jpeg',style: "border-radius: 50%;", fallback: "no_image.jpg",:class=>"icon" %>
+                  </label>
                     <input type="checkbox" id="label1"/>
                     <div class="hidden_show" style="color: black;">
                       <ul style="list-style: none; padding-inline-start: 20px;">
-                      <li class="hidden_list"><%= link_to  user_user_path(current_user.id),:style=>"color:#8b0000; " do %>
+                        <li class="hidden_list">
+                          <%= link_to  user_user_path(current_user.id),:style=>"color:#8b0000; " do %>
                             <i class="fas fa-address-card"><span style="margin-left: 5px;">My Page</span></i>
                           <% end %>
-                      </li>
-                      <li class="hidden_list"><%= link_to  edit_user_user_path(current_user.id),:style=>"color:#8b0000;" do %>
+                        </li>
+                        <li class="hidden_list">
+                          <%= link_to  edit_user_user_path(current_user.id),:style=>"color:#8b0000;" do %>
                             <i class="fas fa-user-edit"><span style="margin-left: 5px;">ユーザー情報編集</span></i>
                           <% end %>
-                      </li>
-                      <li class="hidden_list"><%= link_to destroy_user_session_path, method: :delete,:style=>"color:#8b0000;" do %>
+                        </li>
+                        <li class="hidden_list">
+                          <%= link_to destroy_user_session_path, method: :delete,:style=>"color:#8b0000;" do %>
                             <i class="fas fa-sign-out-alt"><span style="margin-left: 5px;">Sign out</span></i>
                           <% end %>
-                      </li>
+                        </li>
                       </ul>
                     </div>
-                  </div>
+                </div>
               </li>
             </ul>
-            <% elsif admin_signed_in? %>
+          <% elsif admin_signed_in? %>
             <ul class="nav navbar-nav">
               <li>
                 <%= link_to admin_searchform_path,:style=>"margin-left:500px;" do %>
-                <i class="fas fa-search-plus classname"></i>
-              <% end %>
+                  <i class="fas fa-search-plus classname"></i>
+                <% end %>
               </li>
               <li>
                 <%= link_to '寺・神社新規追加', new_admin_temple_path, class: 'btn btn-default',:style=>"color:white; background-color:#6b8e23; border-radius:30%;" %>
@@ -85,25 +87,29 @@
                 <% end %>
               </li>
             </ul>
-            <% else %>
+          <% else %>
             <ul class="nav navbar-nav" style="margin-left: 1050px;">
-              <li><%= link_to new_user_registration_path,:style=>"color:moccasin;" do %>
-                    <span class="glyphicon glyphicon-user"></span> Sign Up
-                  <% end %>
+              <li>
+                <%= link_to new_user_registration_path,:style=>"color:moccasin;" do %>
+                  <span class="glyphicon glyphicon-user"></span> Sign Up
+                <% end %>
               </li>
-               <li style="margin-left: 50px;"><%= link_to new_user_session_path,:style=>"color:moccasin;" do %>
-                    <span class="glyphicon glyphicon-log-in"></span> Login
-                  <% end %>
+              <li style="margin-left: 50px;">
+                <%= link_to new_user_session_path,:style=>"color:moccasin;" do %>
+                  <span class="glyphicon glyphicon-log-in"></span> Login
+                <% end %>
               </li>
             </ul>
-            <% end %>
+          <% end %>
         </div>
       </nav>
     </header>
 
     <%= yield %>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.4/css/all.css">
-    <div id="page_top"><a href="#"></a></div>
+      <div id="page_top">
+        <a href="#"></a>
+      </div>
     <% if user_signed_in? %>
       <%= link_to new_user_contact_path ,:style=>"color:moccasin;" do %>
         <i class="fas fa-comment-dots" data-toggle="tooltip" data-placement="top" title="上に出るツールチップ" style="font-size: 50px; color: yellowgreen; position: fixed; bottom: 100px; right: 30px;"></i>

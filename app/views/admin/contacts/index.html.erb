@@ -1,29 +1,27 @@
 <div class="raw" style="margin-top: 140px;">
 	<div class="col-md-6" style="margin: 0 auto; text-align: center;">
-
 		<h1 style="border-bottom: solid 2px #8b0000">問い合わせ一覧</h1>
-
 		<table class="table table-hover">
-		　	<thead class="thead-dark">
+			<thead class="thead-dark">
 				<tr>
-		      		<th>ユーザー名</th>
-		      		<th scope="col">問い合わせ内容</th>
-		      		<th scope="col">回答状況</th>
-		    	</tr>
-		    </thead>
-		    <tbody>
-		    	<% @contacts.each do |contact| %>
-				    <tr>
-					    <td><%= attachment_image_tag contact.user, :profile_image, :fill, 50, 50, format: 'jpeg',style: "border-radius: 50%;", fallback: "no_image.jpg" %><%= contact.user.name %></td>
-					    <td><%= link_to "詳細画面", admin_contact_path(contact.id) %></td>
-					    <% if contact.reply.nil? %>
+					<th>ユーザー名</th>
+					<th scope="col">問い合わせ内容</th>
+					<th scope="col">回答状況</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @contacts.each do |contact| %>
+					<tr>
+						<td><%= attachment_image_tag contact.user, :profile_image, :fill, 50, 50, format: 'jpeg',style: "border-radius: 50%;", fallback: "no_image.jpg" %><%= contact.user.name %></td>
+						<td><%= link_to "詳細画面", admin_contact_path(contact.id) %></td>
+						<% if contact.reply.nil? %>
 							<td style="width: 100px; color: red;">未送信</td>
 						<% else %>
 							<td style="width: 100px; color: green;">送信済み</td>
 						<% end %>
-				    </tr>
+					</tr>
 				<% end %>
-		  	</tbody>
+			</tbody>
 		</table>
 	</div>
 </div>

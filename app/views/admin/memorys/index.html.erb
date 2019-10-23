@@ -1,113 +1,111 @@
 <div class="templeheader" style="background-color: moccasin; width: 100%; margin: 0 auto; margin-bottom: 5px;">
-    <ul class="nav nav-pills justify-content-center" >
-      <li class="nav-item">
-        <%= link_to  admin_temples_path, class: "nav-link" do %>
-          <i class="fas fa-torii-gate"><span style="margin-left: 5px;">寺・神社</span></i>
-        <% end %>
-      </li>
-      <li class="nav-item">
-        <%= link_to  admin_memorys_path, class: "nav-link active" do %>
-          <i class="fas fa-feather-alt"><span style="margin-left: 5px;">参拝記録</span></i>
-        <% end %>
-      </li>
-      <li class="nav-item">
-        <%= link_to  admin_questions_path, class: "nav-link" do %>
-          <i class="fas fa-question-circle"><span style="margin-left: 5px;">質問</span></i>
-        <% end %>
-      </li>
-    </ul>
+  <ul class="nav nav-pills justify-content-center" >
+    <li class="nav-item">
+      <%= link_to  admin_temples_path, class: "nav-link" do %>
+        <i class="fas fa-torii-gate"><span style="margin-left: 5px;">寺・神社</span></i>
+      <% end %>
+    </li>
+    <li class="nav-item">
+      <%= link_to  admin_memorys_path, class: "nav-link active" do %>
+        <i class="fas fa-feather-alt"><span style="margin-left: 5px;">参拝記録</span></i>
+      <% end %>
+    </li>
+    <li class="nav-item">
+      <%= link_to  admin_questions_path, class: "nav-link" do %>
+        <i class="fas fa-question-circle"><span style="margin-left: 5px;">質問</span></i>
+      <% end %>
+    </li>
+  </ul>
 </div>
 
 <div class="navheader" style="margin: 0 auto; background-color: moccasin; width: 100%;">
-    <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
-      <li class="nav-item">
-        <a class="nav-link active" id="pills-ranking-tab" data-toggle="pill" href="#pills-ranking" role="tab" aria-controls="pills-ranking"   aria-selected="true"><i class="fas fa-crown"><span style="margin-left: 5px;">週間いいねランキング</span></i>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="pills-new-tab" data-toggle="pill" href="#pills-new" role="tab" aria-controls="pills-new" aria-selected="false">最新の投稿
-        </a>
-      </li>
-    </ul>
+  <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="pills-ranking-tab" data-toggle="pill" href="#pills-ranking" role="tab" aria-controls="pills-ranking"   aria-selected="true">
+        <i class="fas fa-crown"><span style="margin-left: 5px;">週間いいねランキング</span></i>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="pills-new-tab" data-toggle="pill" href="#pills-new" role="tab" aria-controls="pills-new" aria-selected="false">最新の投稿
+      </a>
+    </li>
+  </ul>
 </div>
 
-<!-- パネル部分 -->
 <div class="tab-content" id="pills-tabContent" style="margin-top : 170px;">
-
-    <div class="tab-pane fade show active" id="pills-ranking" role="tabpanel" aria-labelledby="pills-ranking-tab" style="margin-top: 20px;">
-        <% @all_ranks.each.with_index(1) do |memory, i| %>
-          <div class="row" style="margin-top: 50px;">
-            <div class="col-lg-7" style="margin: 0 auto;">
-              <i class="fas fa-award" style="color: gold; font-size: 40px;">
-                <span style="color: black; font-size: 25px; margin-left: 5px;"><%= "#{i}" %>位</span>
-                <span style="font-size: 22px;  color: white; background-color:#8b0000; text-align: center;">
+  <div class="tab-pane fade show active" id="pills-ranking" role="tabpanel" aria-labelledby="pills-ranking-tab" style="margin-top: 20px;">
+    <% @all_ranks.each.with_index(1) do |memory, i| %>
+      <div class="row" style="margin-top: 50px;">
+        <div class="col-lg-7" style="margin: 0 auto;">
+          <i class="fas fa-award" style="color: gold; font-size: 40px;">
+            <span style="color: black; font-size: 25px; margin-left: 5px;"><%= "#{i}" %>位</span>
+            <span style="font-size: 22px;  color: white; background-color:#8b0000; text-align: center;">
                   週間いいね数：<%= memory.favorites.count %>
-                </span>
-              </i>
-              <div class="well" style="margin-top: 30px; border: solid 1px #8b0000; padding: 10px;">
-                 <div style="border-bottom: dashed 1px lightgray; ">
-                    <%= link_to admin_user_path(memory.user) ,:style=>"color:#8b0000;" do %>
-                    <%= attachment_image_tag memory.user, :profile_image, :fill, 50, 50, format: 'jpeg',style: "border-radius: 50%;", fallback: "no_image.jpg" %>
-                    <strong style="margin:10px,0,0,6px; font-size: 20px;"><%= memory.user.name %></strong>さん<br>
-                    <% end %>
-                    <p style="margin-bottom: 0px;">投稿日：<%= memory.created_at.strftime("%Y-%m-%d %H:%M") %>
-                                <i class="fa fa-heart" aria-hidden="true" style="color: #e83b69; font-size: 20px; margin-left: 30px;"></i>
-                                <strong style="color: #e83b69; font-size: 20px; margin-left: 5px;"><%= memory.favorites.count %></strong>
-                    </p>
-                </div>
-                    <h3 style="width: 350px;  margin-top: 10px;">
-                      <%= link_to admin_temple_path(memory.temple) ,:style=>"color:#8b0000;" do %>
-                      <%= memory.temple.name %>(<%= memory.temple.prefecture.name %>)
-                      <% end %>
-                    </h3>
-                    <strong style="font-size: 20px; border-bottom: solid 1px black;"><%= memory.title %></strong><br>
-                    <p style="font-size: 15px;">訪問日：<%= memory.visit_date %></p>
-                    <br>
-                    <div style="margin: 0; width: 600px;">
-                    <%= simple_format(memory.body) %><br>
-                </div>
-                  <% memory.memory_images.each do |image| %>
-                    <%= attachment_image_tag image, :image, :fill, 150, 150, format: 'jpeg' %>
-                  <% end %>
-              </div>
+            </span>
+          </i>
+          <div class="well" style="margin-top: 30px; border: solid 1px #8b0000; padding: 10px;">
+            <div style="border-bottom: dashed 1px lightgray; ">
+              <%= link_to admin_user_path(memory.user) ,:style=>"color:#8b0000;" do %>
+                <%= attachment_image_tag memory.user, :profile_image, :fill, 50, 50, format: 'jpeg',style: "border-radius: 50%;", fallback: "no_image.jpg" %>
+                <strong style="margin:10px,0,0,6px; font-size: 20px;"><%= memory.user.name %></strong>さん<br>
+              <% end %>
+              <p style="margin-bottom: 0px;">投稿日：<%= memory.created_at.strftime("%Y-%m-%d %H:%M") %>
+                <i class="fa fa-heart" aria-hidden="true" style="color: #e83b69; font-size: 20px; margin-left: 30px;"></i>
+                <strong style="color: #e83b69; font-size: 20px; margin-left: 5px;"><%= memory.favorites.count %></strong>
+              </p>
             </div>
-          </div>
-        <% end %>
-    </div>
-
-    <div class="tab-pane fade" id="pills-new" role="tabpanel" aria-labelledby="pills-new-tab">
-        <% @memorys.each do |memory| %>
-          <div class="row" style="margin-top: 50px;">
-            <div class="col-lg-7" style="margin: 0 auto;">
-              <div class="well" style="margin-top: 30px; border: solid 1px #8b0000; padding: 10px;">
-                 <div style="border-bottom: dashed 1px lightgray; ">
-                    <%= link_to admin_user_path(memory.user) ,:style=>"color:#8b0000;" do %>
-                    <%= attachment_image_tag memory.user, :profile_image, :fill, 50, 50, format: 'jpeg',style: "border-radius: 50%;", fallback: "no_image.jpg" %>
-                    <strong style="margin:10px,0,0,6px; font-size: 20px;"><%= memory.user.name %></strong>さん<br>
-                    <% end %>
-                    <p style="margin-bottom: 0px;">投稿日：<%= memory.created_at.strftime("%Y-%m-%d %H:%M") %>
-                                <i class="fa fa-heart" aria-hidden="true" style="color: #e83b69; font-size: 20px; margin-left: 30px;"></i>
-                                <strong style="color: #e83b69; font-size: 20px; margin-left: 5px;"><%= memory.favorites.count %></strong>
-                    </p>
-                </div>
-                    <h3 style="width: 350px;  margin-top: 10px;">
-                      <%= link_to admin_temple_path(memory.temple) ,:style=>"color:#8b0000;" do %>
-                      <%= memory.temple.name %>(<%= memory.temple.prefecture.name %>)
-                      <% end %>
-                    </h3>
-                    <strong style="font-size: 20px; border-bottom: solid 1px black;"><%= memory.title %></strong><br>
-                    <p style="font-size: 15px;">訪問日：<%= memory.visit_date %></p>
-                    <br>
-                    <div style="margin: 0; width: 600px;">
-                    <%= simple_format(memory.body) %><br>
-                </div>
-                  <% memory.memory_images.each do |image| %>
-                    <%= attachment_image_tag image, :image, :fill, 150, 150, format: 'jpeg' %>
-                  <% end %>
-              </div>
+            <h3 style="width: 350px;  margin-top: 10px;">
+              <%= link_to admin_temple_path(memory.temple) ,:style=>"color:#8b0000;" do %>
+                <%= memory.temple.name %>(<%= memory.temple.prefecture.name %>)
+              <% end %>
+            </h3>
+            <strong style="font-size: 20px; border-bottom: solid 1px black;"><%= memory.title %></strong><br>
+            <p style="font-size: 15px;">訪問日：<%= memory.visit_date %></p><br>
+            <div style="margin: 0; width: 600px;">
+              <%= simple_format(memory.body) %><br>
             </div>
+            <% memory.memory_images.each do |image| %>
+              <%= attachment_image_tag image, :image, :fill, 150, 150, format: 'jpeg' %>
+            <% end %>
           </div>
-        <% end %>
-        <div style="margin-left: 650px; margin-top: 20px; color:#8b0000; "><%= paginate @memorys %></div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="tab-pane fade" id="pills-new" role="tabpanel" aria-labelledby="pills-new-tab">
+    <% @memorys.each do |memory| %>
+      <div class="row" style="margin-top: 50px;">
+        <div class="col-lg-7" style="margin: 0 auto;">
+          <div class="well" style="margin-top: 30px; border: solid 1px #8b0000; padding: 10px;">
+            <div style="border-bottom: dashed 1px lightgray; ">
+              <%= link_to admin_user_path(memory.user) ,:style=>"color:#8b0000;" do %>
+                <%= attachment_image_tag memory.user, :profile_image, :fill, 50, 50, format: 'jpeg',style: "border-radius: 50%;", fallback: "no_image.jpg" %>
+                <strong style="margin:10px,0,0,6px; font-size: 20px;"><%= memory.user.name %></strong>さん<br>
+              <% end %>
+              <p style="margin-bottom: 0px;">投稿日：<%= memory.created_at.strftime("%Y-%m-%d %H:%M") %>
+                <i class="fa fa-heart" aria-hidden="true" style="color: #e83b69; font-size: 20px; margin-left: 30px;"></i>
+                <strong style="color: #e83b69; font-size: 20px; margin-left: 5px;"><%= memory.favorites.count %></strong>
+              </p>
+            </div>
+            <h3 style="width: 350px;  margin-top: 10px;">
+              <%= link_to admin_temple_path(memory.temple) ,:style=>"color:#8b0000;" do %>
+                <%= memory.temple.name %>(<%= memory.temple.prefecture.name %>)
+              <% end %>
+            </h3>
+            <strong style="font-size: 20px; border-bottom: solid 1px black;"><%= memory.title %></strong><br>
+            <p style="font-size: 15px;">訪問日：<%= memory.visit_date %></p><br>
+            <div style="margin: 0; width: 600px;">
+              <%= simple_format(memory.body) %><br>
+            </div>
+            <% memory.memory_images.each do |image| %>
+              <%= attachment_image_tag image, :image, :fill, 150, 150, format: 'jpeg' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <div style="margin-left: 650px; margin-top: 20px; color:#8b0000; ">
+      <%= paginate @memorys %>
     </div>
+  </div>
 </div>

@@ -23,7 +23,6 @@ class Admin::ContactsController < ApplicationController
 
 
 private
-
   def reply_params
   	params.require(:contact).permit(:reply)
   end

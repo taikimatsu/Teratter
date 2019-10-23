@@ -1,14 +1,13 @@
 <h1 style="margin-top : 140px; margin-left: 170px;">検索結果</h1>
-
 <div>
-<% @temples.each do |temple| %>
+	<% @temples.each do |temple| %>
         <div class="temples">
-          <%= link_to admin_temple_path(temple)  do %>
-            <%= attachment_image_tag temple, :mainimage, :fill, 350, 270, format: 'jpeg', fallback: "no_image.jpg",class: "temples-image" %>
-            <p><%= temple.name %></p>
-            <h4>(<%= temple.prefecture.name %>)</h4>
+         	<%= link_to admin_temple_path(temple)  do %>
+            	<%= attachment_image_tag temple, :mainimage, :fill, 350, 270, format: 'jpeg', fallback: "no_image.jpg",class: "temples-image" %>
+            	<p><%= temple.name %></p>
+            	<h4>(<%= temple.prefecture.name %>)</h4>
           <% end %>
         </div>
-<% end %>
-<%= paginate @temples %>
+	<% end %>
+	<%= paginate @temples %>
 </div>

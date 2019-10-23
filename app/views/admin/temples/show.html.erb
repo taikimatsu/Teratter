@@ -2,20 +2,18 @@
 	<p><%= flash[:notice] %></p>
 <% end %>
 <div class="row" style="margin-top : 120px;">
-
-			<div class="col-lg-4" style="margin-left: 50px;">
-				<div>
-					<div style="font-size: 50px; border-bottom: solid 3px #8b0000; text-align: center;">
-						<%= @temple.name %><br>
-						<%= link_to "編集", edit_admin_temple_path(@temple), class: "btn btn-info col-md-2 col-md-offset-1" %>
-						<%= link_to "削除", admin_temple_path(@temple), method: :delete, class: "btn btn-info col-md-2 col-md-offset-1", "data-confirm" => "本当に削除しますか？",:style=>"background-color:red;" %>
-					</div>
-					<div id="temple-info"><%= @temple.address %></div>
-					<div id="temple-info">ご利益：<%= @temple.goriyaku.name %></div>
-				</div>
-				<div id="map" style='width: 250px; height: 250px;'></div>
-
-				  <script type="text/javascript">
+	<div class="col-lg-4" style="margin-left: 50px;">
+		<div>
+			<div style="font-size: 50px; border-bottom: solid 3px #8b0000; text-align: center;">
+				<%= @temple.name %><br>
+				<%= link_to "編集", edit_admin_temple_path(@temple), class: "btn btn-info col-md-2 col-md-offset-1" %>
+				<%= link_to "削除", admin_temple_path(@temple), method: :delete, class: "btn btn-info col-md-2 col-md-offset-1", "data-confirm" => "本当に削除しますか？",:style=>"background-color:red;" %>
+			</div>
+			<div id="temple-info"><%= @temple.address %></div>
+			<div id="temple-info">ご利益：<%= @temple.goriyaku.name %></div>
+		</div>
+		<div id="map" style='width: 250px; height: 250px;'></div>
+			<script type="text/javascript">
 				    handler = Gmaps.build('Google');
 				    handler.buildMap({ provider: { scrollwheel: false }, internal: {id: 'map'}}, function(){
 				      markers = handler.addMarkers([
@@ -29,68 +27,64 @@
 				      handler.fitMapToBounds();
 				      handler.getMap().setZoom(17);
 				    });
-				  </script>
+			</script>
+		<div class="col-lg-5" style="margin-left: 50px; margin-top: 50px;">
+			<div class="tab-content" id="nav-tabContent" style="text-align: center; ">
+				<div class="tab-pane fade show active" id="list-mainimage" role="tabpanel" aria-labelledby="list-home-list">
+				    <%= attachment_image_tag @temple, :mainimage, :fill, 576, 420, format: 'jpeg' %>
+				</div>
+				<% @temple.temple_images.each do |image| %>
+					<div class="tab-pane fade" id="list-image-<%=image.id %>" role="tabpanel" aria-labelledby="list-image-list">
+					    <%= attachment_image_tag image, :image, :fill, 576, 420, format: 'jpeg' %>
+					</div>
+				<% end %>
 			</div>
-
-				<div class="col-lg-5" style="margin-left: 50px; margin-top: 50px;">
-				    <div class="tab-content" id="nav-tabContent" style="text-align: center; ">
-				      <div class="tab-pane fade show active" id="list-mainimage" role="tabpanel" aria-labelledby="list-home-list">
-				      	<%= attachment_image_tag @temple, :mainimage, :fill, 576, 420, format: 'jpeg' %>
-				      </div>
-				      <% @temple.temple_images.each do |image| %>
-					      <div class="tab-pane fade" id="list-image-<%=image.id %>" role="tabpanel" aria-labelledby="list-image-list">
-					      	<%= attachment_image_tag image, :image, :fill, 576, 420, format: 'jpeg' %>
-					      </div>
-					  <% end %>
-				    </div>
-				</div>
-
-				<div class="col-lg-2" style="margin-top: 70px;">
-					<div class="list-group  text-center" id="list-tab" role="tablist" style="margin-right: 20px;">
-				      	<a class="list-group-item list-group-item-action active"  data-toggle="list" href="#list-mainimage" role="tab" aria-controls="list-mainimage">
-				      		<%= attachment_image_tag @temple, :mainimage, :fill, 100, 70, format: 'jpeg' %>
-				      	</a>
-				      <% @temple.temple_images.each do |image| %>
-				      	<a class="list-group-item list-group-item-action" id="list-image-<%=image.id %>-list" data-toggle="list" href="#list-image-<%=image.id %>" role="tab" aria-controls="list-image">
-				      		<%= attachment_image_tag image, :image, :fill, 100, 70, format: 'jpeg' %>
-				      	</a>
-				      <% end %>
-				    </div>
-				</div>
+		</div>
+		<div class="col-lg-2" style="margin-top: 70px;">
+			<div class="list-group  text-center" id="list-tab" role="tablist" style="margin-right: 20px;">
+				<a class="list-group-item list-group-item-action active"  data-toggle="list" href="#list-mainimage" role="tab" aria-controls="list-mainimage">
+				    <%= attachment_image_tag @temple, :mainimage, :fill, 100, 70, format: 'jpeg' %>
+				</a>
+				<% @temple.temple_images.each do |image| %>
+				    <a class="list-group-item list-group-item-action" id="list-image-<%=image.id %>-list" data-toggle="list" href="#list-image-<%=image.id %>" role="tab" aria-controls="list-image">
+				      	<%= attachment_image_tag image, :image, :fill, 100, 70, format: 'jpeg' %>
+				    </a>
+				<% end %>
+			</div>
+		</div>
 	</div>
-
 	<div class="row" style="margin-top: 100px; margin-bottom: 30px;">
 		<div class="col-lg-7" style="margin: 0 auto;">
 			<h2 style="border-bottom: solid 3px #8b0000; text-align: center;">
 				<%= @temple.name %>の投稿一覧
 			</h2>
 			<% @memorys.each do |memory| %>
-			<div class="well" style="margin-top: 30px; border: solid 1px #8b0000; padding: 10px;">
-				<div style="border-bottom: dashed 1px lightgray; ">
-				<%= link_to admin_user_path(memory.user) ,:style=>"color:#8b0000;" do %>
-				<%= attachment_image_tag memory.user, :profile_image, :fill, 50, 50, format: 'jpeg',style: "border-radius: 50%;", fallback: "no_image.jpg" %>
-				<strong style="margin:10px,0,0,6px; font-size: 20px;"><%= memory.user.name %></strong>さん<br>
-				<% end %>
-				<p style="margin-bottom: 0px;">投稿日：<%= memory.created_at.strftime("%Y-%m-%d %H:%M") %>
-      							<i class="fa fa-heart" aria-hidden="true" style="color: navy; font-size: 20px; margin-left: 30px;"></i>
-      							<strong style="color: black; font-size: 20px; margin-left: 5px;"><%= memory.favorites.count %></strong>
-						<%= link_to "削除", admin_memory_path(memory), method: :delete, class: "btn btn-info col-md-1 col-md-offset-1" %>
-				</p>
+				<div class="well" style="margin-top: 30px; border: solid 1px #8b0000; padding: 10px;">
+					<div style="border-bottom: dashed 1px lightgray; ">
+						<%= link_to admin_user_path(memory.user) ,:style=>"color:#8b0000;" do %>
+							<%= attachment_image_tag memory.user, :profile_image, :fill, 50, 50, format: 'jpeg',style: "border-radius: 50%;", fallback: "no_image.jpg" %>
+							<strong style="margin:10px,0,0,6px; font-size: 20px;"><%= memory.user.name %></strong>さん<br>
+						<% end %>
+						<p style="margin-bottom: 0px;">投稿日：<%= memory.created_at.strftime("%Y-%m-%d %H:%M") %>
+      						<i class="fa fa-heart" aria-hidden="true" style="color: navy; font-size: 20px; margin-left: 30px;"></i>
+      						<strong style="color: black; font-size: 20px; margin-left: 5px;"><%= memory.favorites.count %></strong>
+							<%= link_to "削除", admin_memory_path(memory), method: :delete, class: "btn btn-info col-md-1 col-md-offset-1" %>
+						</p>
+					</div>
+					<strong style="font-size: 20px; border-bottom: solid 1px black;"><%= memory.title %></strong><br>
+					<p style="font-size: 15px;">訪問日：<%= memory.visit_date %></p><br>
+					<div style="margin: 0; width: 600px;">
+						<%= simple_format(memory.body) %><br>
+					</div>
+					<% memory.memory_images.each do |image| %>
+						<%= attachment_image_tag image, :image, :fill, 150, 150, format: 'jpeg' %>
+					<% end %>
 				</div>
-				<strong style="font-size: 20px; border-bottom: solid 1px black;"><%= memory.title %></strong><br>
-				<p style="font-size: 15px;">訪問日：<%= memory.visit_date %></p>
-				<br>
-				<div style="margin: 0; width: 600px;">
-				<%= simple_format(memory.body) %><br>
-				</div>
-				<% memory.memory_images.each do |image| %>
-					<%= attachment_image_tag image, :image, :fill, 150, 150, format: 'jpeg' %>
-				<% end %>
-			</div>
 			<% end %>
 			<%= paginate @memorys %>
 		</div>
 	</div>
+</div>
 
 
 

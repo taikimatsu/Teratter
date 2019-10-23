@@ -1,50 +1,40 @@
 <div class="raw" style="margin-top: 140px;">
 	<div class="col-md-6" style="margin: 0 auto; text-align: center;">
-
 		<h1 style="border-bottom: solid 2px #8b0000"> 寺・神社新規投稿</h1>
-
 		<div style="margin-top: 20px;">
 			<%= form_for(@temple, :url => {:controller => :temples, :action => :create}) do |f| %>
-
 				<div style="margin-top: 20px;">
 					<h3>寺・神社名</h3>
 					<%= f.text_field :name %>
 				</div>
-
 				<div style="margin-top: 20px;">
 					<h3>メイン写真</h3>
 					<%= f.attachment_field :mainimage %>
 				</div>
-
 				<div style="margin-top: 20px;">
 					<h3>その他写真</h3>
 					<%= f.attachment_field :temple_images_images, multiple: true %>
 				</div>
-
 				<div style="margin-top: 20px;">
 					<h3>エリア</h3>
-				<%= f.select :area, Temple.areas.keys, class: "select-default" %>
+					<%= f.select :area, Temple.areas.keys, class: "select-default" %>
 				</div>
-
 				<div style="margin-top: 20px;">
 					<h3>都道府県</h3>
-				<%= f.collection_select :prefecture_id, Prefecture.all, :id, :name %>
+					<%= f.collection_select :prefecture_id, Prefecture.all, :id, :name %>
 				</div>
-
 				<div style="margin-top: 20px;">
 					<h3>場所</h3>
 					<%= f.text_field :address %>
 				</div>
-
 				<div style="margin-top: 20px;">
 					<h3>ご利益</h3>
-				<%= f.collection_select :goriyaku_id, Goriyaku.all, :id, :name %>
+					<%= f.collection_select :goriyaku_id, Goriyaku.all, :id, :name %>
 				</div>
-
 				<div style="margin-top: 20px;">
 					<%= f.submit '新規追加' %>
 				</div>
-
 			<% end %>
+		</div>
 	</div>
 </div>

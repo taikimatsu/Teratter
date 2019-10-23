@@ -1,8 +1,6 @@
 <div class="raw" style="margin-top: 140px;">
 	<div class="col-md-6" style="margin: 0 auto; text-align: center;">
-
 		<h1 style="border-bottom: solid 2px #8b0000">ユーザー一覧</h1>
-
 		<table class="table table-hover">
 		　	<thead class="thead-dark">
 				<tr>
@@ -14,9 +12,9 @@
 		    <tbody>
 		    	<% @users.each do |user| %>
 				    <tr>
-				      <td><%= attachment_image_tag user, :profile_image, :fill, 50, 50, format: 'jpeg',style: "border-radius: 50%;", fallback: "no_image.jpg" %></td>
-				      <td><%= link_to admin_user_path(user),:style=>"color:#8b0000;" do%><%= user.name %><% end %></td>
-				      <td><%= user.memorys.count %></td>
+				    	<td><%= attachment_image_tag user, :profile_image, :fill, 50, 50, format: 'jpeg',style: "border-radius: 50%;", fallback: "no_image.jpg" %></td>
+				      	<td><%= link_to admin_user_path(user),:style=>"color:#8b0000;" do%><%= user.name %><% end %></td>
+				      	<td><%= user.memorys.count %></td>
 				    </tr>
 				<% end %>
 				<%= paginate @users %>

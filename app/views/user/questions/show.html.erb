@@ -1,75 +1,73 @@
 <div class="templeheader" style="background-color: moccasin; width: 100%; margin: 0 auto; margin-bottom: 5px;">
     <ul class="nav nav-pills justify-content-center" >
-      <li class="nav-item">
-        <%= link_to  user_temples_path, class: "nav-link" do %>
-          <i class="fas fa-torii-gate"><span style="margin-left: 5px;">寺・神社</span></i>
-        <% end %>
-      </li>
-      <li class="nav-item">
-        <%= link_to  user_memorys_path, class: "nav-link" do %>
-          <i class="fas fa-feather-alt"><span style="margin-left: 5px;">参拝記録</span></i>
-        <% end %>
-      </li>
-      <li class="nav-item">
-        <%= link_to  user_questions_path, class: "nav-link active" do %>
-          <i class="fas fa-question-circle"><span style="margin-left: 5px;">質問</span></i>
-        <% end %>
-      </li>
+    	<li class="nav-item">
+        	<%= link_to  user_temples_path, class: "nav-link" do %>
+          		<i class="fas fa-torii-gate"><span style="margin-left: 5px;">寺・神社</span></i>
+        	<% end %>
+      	</li>
+      	<li class="nav-item">
+        	<%= link_to  user_memorys_path, class: "nav-link" do %>
+          		<i class="fas fa-feather-alt"><span style="margin-left: 5px;">参拝記録</span></i>
+        	<% end %>
+      	</li>
+      	<li class="nav-item">
+        	<%= link_to  user_questions_path, class: "nav-link active" do %>
+          		<i class="fas fa-question-circle"><span style="margin-left: 5px;">質問</span></i>
+        	<% end %>
+      	</li>
     </ul>
 </div>
-
 <div class="row" style="margin-top: 200px; ">
 	<div class="col-lg-7" style="margin: 0 auto; border:solid 2px #8b0000; padding-top: 10px;">
 		<p>
 			<%= link_to user_user_path(@question.user),:style=>"color:#8b0000; text-decoration: none;" do %>
 				<%= attachment_image_tag @question.user, :profile_image, :fill, 50, 50, format: 'jpeg',style: "border-radius: 50%;" %><strong style="margin-left: 20px; margin-right: 20px; font-size: 20px;"><%= @question.user.name %></strong>
-			<% end %>さんの質問
-			<span style="margin-left: 230px;">
-				<%= @question.created_at.strftime("%Y-%m-%d %H:%M") %>
-				<%= link_to new_user_question_answers_path(@question),:style=>"color:yellowgreen; margin-left:20px; font-size:20px; margin-top:30px;" do %>
-					<i class="fas fa-reply">回答する</i>
-				<% end %>
-				<% if @question.user == current_user %>
-				    <%= link_to  user_question_path(@question), method: :delete,"data-confirm" => "削除しますか？",style: "color:#8b0000; font-size:25px; margin-left:20px;" do %>
-				        <i class="fas fa-trash-alt"></i>
-				    <% end %>
-			    <% end %>
-			</span>
+				<% end %>さんの質問
+				<span style="margin-left: 230px;">
+					<%= @question.created_at.strftime("%Y-%m-%d %H:%M") %>
+					<%= link_to new_user_question_answers_path(@question),:style=>"color:yellowgreen; margin-left:20px; font-size:20px; margin-top:30px;" do %>
+						<i class="fas fa-reply">回答する</i>
+					<% end %>
+					<% if @question.user == current_user %>
+				    	<%= link_to  user_question_path(@question), method: :delete,"data-confirm" => "削除しますか？",style: "color:#8b0000; font-size:25px; margin-left:20px;" do %>
+				    		<i class="fas fa-trash-alt"></i>
+				    	<% end %>
+			    	<% end %>
+				</span>
 		</p><br>
 		<p style="margin-bottom: 40px; margin-left: 70px;"><%= @question.body %></p>
 	</div>
 </div>
-
 <% if @answers.present? %>
 	<% @answers.each do |answer| %>
 		<div class="row" style="margin-top: 100px; ">
 			<div class="col-lg-7" style="margin: 0 auto; border:solid 2px black; padding-top: 20px;">
 				<p>
-				<%= link_to user_user_path(answer.user),:style=>"color:#8b0000; text-decoration: none;" do %>
-					<%= attachment_image_tag answer.user, :profile_image, :fill, 50, 50, format: 'jpeg',style: "border-radius: 50%;" %><strong style="margin-left: 20px; margin-right: 20px;"><%= answer.user.name %></strong>
-				<% end %>さんの回答
-				<span style="margin-left: 250px;">
-					<%= answer.created_at.strftime("%Y-%m-%d %H:%M") %>
-					<% if answer.user == current_user %>
-					    <%= link_to  user_question_answers_path(answer), method: :delete,"data-confirm" => "削除しますか？",style: "color:#8b0000; font-size:25px; margin-left:20px;" do %>
-					        <i class="fas fa-trash-alt"></i>
-					    <% end %>
-		    		<% end %>
-				</span>
-			</p><br>
-			<p style="margin-bottom: 40px; margin-left: 70px;"><%= answer.body %></p>
+					<%= link_to user_user_path(answer.user),:style=>"color:#8b0000; text-decoration: none;" do %>
+						<%= attachment_image_tag answer.user, :profile_image, :fill, 50, 50, format: 'jpeg',style: "border-radius: 50%;" %><strong style="margin-left: 20px; margin-right: 20px;"><%= answer.user.name %></strong>
+						<% end %>さんの回答
+						<span style="margin-left: 250px;">
+							<%= answer.created_at.strftime("%Y-%m-%d %H:%M") %>
+							<% if answer.user == current_user %>
+					    		<%= link_to  user_question_answers_path(answer), method: :delete,"data-confirm" => "削除しますか？",style: "color:#8b0000; font-size:25px; margin-left:20px;" do %>
+					        		<i class="fas fa-trash-alt"></i>
+					    		<% end %>
+		    				<% end %>
+						</span>
+				</p><br>
+				<p style="margin-bottom: 40px; margin-left: 70px;"><%= answer.body %></p>
 			</div>
 		</div>
 	<% end %>
 	<span style="margin: 20px auto;"><%= paginate @answers %></span>
 <% else %>
 	<div class="row" style="margin-top: 100px; ">
-			<div class="col-lg-7" style="margin: 0 auto; border:solid 2px black; padding-top: 20px;">
-				<p>
+		<div class="col-lg-7" style="margin: 0 auto; border:solid 2px black; padding-top: 20px;">
+			<p>
 				回答はまだありません。
-				</p>
-			</div>
+			</p>
 		</div>
+	</div>
 <% end %>
 
 

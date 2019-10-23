@@ -1,36 +1,35 @@
 <div class="templeheader" style="background-color: moccasin; width: 100%; margin: 0 auto; margin-bottom: 5px;">
     <ul class="nav nav-pills justify-content-center" >
-      <li class="nav-item">
-        <%= link_to  admin_temples_path, class: "nav-link" do %>
-          <i class="fas fa-torii-gate"><span style="margin-left: 5px;">寺・神社</span></i>
-        <% end %>
-      </li>
-      <li class="nav-item">
-        <%= link_to  admin_memorys_path, class: "nav-link" do %>
-          <i class="fas fa-feather-alt"><span style="margin-left: 5px;">参拝記録</span></i>
-        <% end %>
-      </li>
-      <li class="nav-item">
-        <%= link_to  admin_questions_path, class: "nav-link active" do %>
-          <i class="fas fa-question-circle"><span style="margin-left: 5px;">質問</span></i>
-        <% end %>
-      </li>
+     	<li class="nav-item">
+        	<%= link_to  admin_temples_path, class: "nav-link" do %>
+          		<i class="fas fa-torii-gate"><span style="margin-left: 5px;">寺・神社</span></i>
+        	<% end %>
+      	</li>
+      	<li class="nav-item">
+        	<%= link_to  admin_memorys_path, class: "nav-link" do %>
+          		<i class="fas fa-feather-alt"><span style="margin-left: 5px;">参拝記録</span></i>
+        	<% end %>
+      	</li>
+      	<li class="nav-item">
+        	<%= link_to  admin_questions_path, class: "nav-link active" do %>
+          		<i class="fas fa-question-circle"><span style="margin-left: 5px;">質問</span></i>
+        	<% end %>
+      	</li>
     </ul>
 </div>
 
 <div class="navheader" style="margin: 0 auto; background-color: moccasin; width: 100%;">
     <ul class="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
-      <li class="nav-item">
-        <a class="nav-link active" id="pills-new-tab" data-toggle="pill" href="#pills-new" role="tab" aria-controls="pills-new" aria-selected="true">最新の質問</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" id="pills-trend-tab" data-toggle="pill" href="#pills-trend" role="tab" aria-controls="pills-trend" aria-selected="false">トレンドの質問</a>
-      </li>
+      	<li class="nav-item">
+        	<a class="nav-link active" id="pills-new-tab" data-toggle="pill" href="#pills-new" role="tab" aria-controls="pills-new" aria-selected="true">最新の質問</a>
+      	</li>
+      	<li class="nav-item">
+        	<a class="nav-link" id="pills-trend-tab" data-toggle="pill" href="#pills-trend" role="tab" aria-controls="pills-trend" aria-selected="false">トレンドの質問</a>
+      	</li>
     </ul>
 </div>
 
 <div class="tab-content" id="pills-tabContent" style="margin-top : 170px;">
-
     <div class="tab-pane fade show active" id="pills-new" role="tabpanel" aria-labelledby="pills-new-tab" style="margin-top: 20px;">
         <div class="row align-items-start" style="margin-top: 50px;">
 			<div class="col-lg-7" style="margin: 0 auto;" >
@@ -73,7 +72,6 @@
 			</div>
 		</div>
     </div>
-
     <div class="tab-pane fade show" id="pills-trend" role="tabpanel" aria-labelledby="pills-trend-tab" style="margin-top: 20px;">
         <div class="row align-items-start" style="margin-top: 50px;">
 			<div class="col-lg-7" style="margin: 0 auto;">
@@ -89,7 +87,7 @@
 							<td><%= simple_format(rank.body) %></td>
 							<td>
 								<%= link_to user_question_path(rank),:style=>"color:black;" do %>
-								<i class="far fa-comment-alt"><strong style="margin-left: 5px;"><%= rank.answers.count %></strong></i>
+									<i class="far fa-comment-alt"><strong style="margin-left: 5px;"><%= rank.answers.count %></strong></i>
 								<% end %>
 							</td>
 							<td>
@@ -109,5 +107,4 @@
 			</div>
 		</div>
     </div>
-
 </div>
